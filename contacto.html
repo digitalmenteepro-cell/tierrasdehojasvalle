@@ -1,0 +1,230 @@
+<!-- ============================================================
+     SECCIÓN 8: CONTACTO + FOOTER + BOTÓN WHATSAPP FLOTANTE (contacto.html)
+     CTA final, pie de página y botón flotante verde
+     Pégalo al final de tu página, antes del </body>
+     ============================================================ -->
+
+<style>
+  /* CTA Final (fondo negro) */
+  .cta-final {
+    background: #111;
+    padding: 90px 5%;
+    text-align: center;
+  }
+  .cta-final .sec-tag-dark {
+    display: inline-block;
+    background: rgba(92,184,70,.1); border: 1px solid rgba(92,184,70,.3);
+    color: #5cb846;
+    padding: 6px 16px; border-radius: 50px;
+    font-size: 11px; font-weight: 700; letter-spacing: .8px;
+    text-transform: uppercase; margin-bottom: 18px;
+  }
+  .cta-final h2 {
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 16px;
+  }
+  .cta-final h2 span { color: #5cb846; }
+  .cta-final p {
+    font-size: 16px; color: rgba(255,255,255,.6);
+    margin-bottom: 36px; max-width: 480px;
+    margin-left: auto; margin-right: auto;
+  }
+  .cta-actions {
+    display: flex; gap: 14px;
+    justify-content: center; flex-wrap: wrap;
+  }
+  .btn-wsp-lg {
+    background: #25D366; color: #fff;
+    padding: 16px 32px; border-radius: 50px;
+    font-size: 16px; font-weight: 700;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: all .3s;
+  }
+  .btn-wsp-lg:hover { background: #20bd5a; transform: translateY(-2px); }
+  .btn-insta {
+    background: linear-gradient(135deg, #833ab4, #fd1d1d, #f77737);
+    color: #fff; padding: 16px 28px; border-radius: 50px;
+    font-size: 15px; font-weight: 700;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: all .3s;
+  }
+  .btn-insta:hover { transform: translateY(-2px); opacity: .9; }
+  .cta-trust {
+    margin-top: 32px; display: flex; gap: 24px;
+    justify-content: center; flex-wrap: wrap;
+  }
+  .cta-trust span {
+    font-size: 12px; color: rgba(255,255,255,.35);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .cta-trust span i { color: #5cb846; }
+
+  /* Footer */
+  footer {
+    background: #0d1f0a;
+    padding: 48px 5% 24px;
+  }
+  .foot-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 40px; margin-bottom: 36px;
+  }
+  .foot-logo img { height: 52px; object-fit: contain; margin-bottom: 14px; }
+  .foot-desc {
+    font-size: 13px; color: rgba(255,255,255,.45);
+    line-height: 1.6; margin-bottom: 18px;
+  }
+  .foot-social { display: flex; gap: 10px; }
+  .foot-social a {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: rgba(255,255,255,.07);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,.5); font-size: 15px;
+    text-decoration: none; transition: all .3s;
+  }
+  .foot-social a:hover { background: var(--green, #3d7a2e); color: #fff; }
+  .foot-contact { display: flex; flex-direction: column; gap: 12px; }
+  .foot-contact a {
+    display: flex; align-items: center; gap: 9px;
+    color: rgba(255,255,255,.5); text-decoration: none;
+    font-size: 13px; transition: color .3s;
+  }
+  .foot-contact a:hover { color: #5cb846; }
+  .foot-contact a i { color: var(--green, #3d7a2e); width: 16px; }
+  .foot-bottom {
+    border-top: 1px solid rgba(255,255,255,.07);
+    padding-top: 20px;
+    display: flex; justify-content: space-between;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .foot-bottom p { font-size: 12px; color: rgba(255,255,255,.25); }
+
+  /* Botón flotante WhatsApp */
+  @keyframes pulse {
+    0%, 100% { opacity: .5; transform: scale(1); }
+    50%       { opacity: 0;  transform: scale(1.4); }
+  }
+  .wa-float {
+    position: fixed; bottom: 24px; right: 24px; z-index: 900;
+  }
+  .wa-btn-float {
+    width: 56px; height: 56px;
+    background: #25D366; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 6px 24px rgba(37,211,102,.4);
+    transition: all .3s; position: relative;
+  }
+  .wa-btn-float:hover { transform: scale(1.1); }
+  .wa-btn-float i { font-size: 28px; color: #fff; }
+  .wa-pulse {
+    position: absolute; inset: -4px; border-radius: 50%;
+    background: rgba(37,211,102,.2);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @media(max-width:600px) {
+    .foot-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<!-- CTA FINAL -->
+<section class="cta-final" id="contacto">
+  <div class="sec-tag-dark reveal">Pide ahora</div>
+  <h2 class="reveal">
+    Tus plantas merecen<br>
+    <span>el mejor sustrato</span>
+  </h2>
+  <p class="reveal">
+    Escríbenos por WhatsApp y recibe tu pedido en casa. Respuesta inmediata.
+  </p>
+  <div class="cta-actions reveal">
+    <a href="https://wa.me/56956595642?text=Hola!%20Quiero%20pedir%20sustrato%20Tierra%20de%20Hojas%20Valle"
+       class="btn-wsp-lg">
+      <i class="fab fa-whatsapp"></i> Hablar por WhatsApp
+    </a>
+    <a href="https://instagram.com/tierra_de_hojas_valle" target="_blank" rel="noopener"
+       class="btn-insta">
+      <i class="fab fa-instagram"></i> Ver Instagram
+    </a>
+  </div>
+  <div class="cta-trust reveal">
+    <span><i class="fas fa-certificate"></i> Cert. SAG</span>
+    <span><i class="fas fa-truck"></i> Despacho a domicilio</span>
+    <span><i class="fas fa-leaf"></i> 100% orgánico</span>
+    <span><i class="fas fa-star"></i> 10 años de experiencia</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="foot-logo">
+        <img
+          src="https://raw.githubusercontent.com/digitalmenteepro-cell/tierradehojasvalle/main/img/IMG_7292%202.jpg"
+          alt="Tierra de Hojas Valle"
+        />
+      </div>
+      <p class="foot-desc">
+        Sustrato certificado SAG para huerta y jardín. Más que tierra, es vida para tus plantas.
+      </p>
+      <div class="foot-social">
+        <a href="https://instagram.com/tierra_de_hojas_valle" target="_blank" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://wa.me/56956595642" target="_blank" aria-label="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://wa.link/3pfy3x" target="_blank" aria-label="Link de WhatsApp">
+          <i class="fas fa-link"></i>
+        </a>
+      </div>
+    </div>
+    <div class="foot-contact">
+      <a href="https://wa.me/56956595642">
+        <i class="fab fa-whatsapp"></i> +56 9 5659 5642
+      </a>
+      <a href="https://instagram.com/tierra_de_hojas_valle">
+        <i class="fab fa-instagram"></i> @tierra_de_hojas_valle
+      </a>
+      <a href="https://wa.link/3pfy3x">
+        <i class="fas fa-link"></i> wa.link/3pfy3x
+      </a>
+      <a href="#inicio">
+        <i class="fas fa-globe"></i> Sustrato Certificado SAG
+      </a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <p>© 2025 Tierra de Hojas Valle · Huerta y Jardín. Todos los derechos reservados.</p>
+    <p>
+      Diseño web:
+      <a href="https://digitalmenteprochile.cl" style="color:#5cb846;text-decoration:none;">
+        Digitalmente Pro Chile
+      </a>
+    </p>
+  </div>
+</footer>
+
+<!-- BOTÓN FLOTANTE WHATSAPP -->
+<div class="wa-float">
+  <a href="https://wa.me/56956595642?text=Hola!%20Quiero%20pedir%20sustrato"
+     class="wa-btn-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <div class="wa-pulse"></div>
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</div>
+
+<!-- Script animaciones scroll (necesario para las clases .reveal) -->
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: .12, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+</script>
