@@ -1,152 +1,476 @@
 <!-- ============================================================
-     SECCIÓN 7: TESTIMONIOS (testimonios.html)
-     3 tarjetas con reseñas de clientes
-     Pégalo después de la galería
+     SECCIÓN 7: TESTIMONIOS — Carrusel automático
      ============================================================ -->
 
 <style>
-  .testimonios { background: var(--gray, #f5f5f3); padding: 80px 5%; }
-  .test-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px; margin-top: 44px;
+  .testimonios {
+    background: var(--gray, #f5f5f3);
+    padding: 80px 0;
+    overflow: hidden;
   }
-  .test-card {
-    background: #fff; border: 1px solid #e8e8e8;
-    border-radius: 16px; padding: 26px;
-    position: relative; box-shadow: 0 2px 10px rgba(0,0,0,.04);
+  .testimonios-header {
+    padding: 0 5%;
+    margin-bottom: 44px;
+  }
+
+  /* ── CARRUSEL ── */
+  .test-carousel-wrap {
+    position: relative;
+  }
+
+  .test-track {
+    display: flex;
+    gap: 20px;
+    padding: 12px 5% 24px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .test-track::-webkit-scrollbar { display: none; }
+  .test-track.grabbing { cursor: grabbing; }
+
+  /* Flechas */
+  .test-arrow {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    width: 42px; height: 42px;
+    background: #fff;
+    border: 2px solid var(--green, #3d7a2e);
+    color: var(--green, #3d7a2e);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+    cursor: pointer;
+    z-index: 10;
+    transition: all .25s;
+    box-shadow: 0 4px 14px rgba(0,0,0,.1);
+  }
+  .test-arrow:hover {
+    background: var(--green, #3d7a2e);
+    color: #fff;
+    transform: translateY(-50%) scale(1.1);
+  }
+  .test-arrow.prev { left: 14px; }
+  .test-arrow.next { right: 14px; }
+
+  /* Dots */
+  .test-dots {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 20px;
+    padding: 0 5%;
+  }
+  .test-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(61,122,46,.2);
+    border: none;
+    cursor: pointer;
     transition: all .3s;
   }
-  .test-card:hover {
-    border-color: rgba(61,122,46,.3);
-    transform: translateY(-4px);
+  .test-dot.active {
+    background: var(--green, #3d7a2e);
+    width: 24px;
+    border-radius: 4px;
   }
+
+  /* Tarjeta */
+  .test-card {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 18px;
+    padding: 26px;
+    position: relative;
+    box-shadow: 0 2px 12px rgba(0,0,0,.05);
+    flex: 0 0 300px;
+    scroll-snap-align: start;
+    user-select: none;
+    transition: all .35s cubic-bezier(.16,1,.3,1);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .test-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 16px 40px rgba(61,122,46,.14);
+    border-color: rgba(61,122,46,.3);
+  }
+
   /* Comilla decorativa */
   .test-card::before {
     content: '"';
-    position: absolute; top: 12px; right: 18px;
-    font-size: 72px; color: rgba(61,122,46,.08);
+    position: absolute; top: 10px; right: 16px;
+    font-size: 68px; color: rgba(61,122,46,.07);
     font-family: Georgia; line-height: 1;
+    pointer-events: none;
   }
-  .test-stars { display: flex; gap: 3px; margin-bottom: 12px; }
+
+  /* Ciudad badge */
+  .test-city {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(61,122,46,.07);
+    color: var(--green, #3d7a2e);
+    border-radius: 50px;
+    padding: 3px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+    width: fit-content;
+  }
+  .test-city i { font-size: 9px; }
+
+  .test-stars { display: flex; gap: 3px; }
   .test-stars i { color: var(--orange, #e8650a); font-size: 13px; }
+
   .test-text {
-    font-size: 13px; color: #444; line-height: 1.7;
-    margin-bottom: 18px; font-style: italic;
+    font-size: 13px; color: #444; line-height: 1.75;
+    font-style: italic; flex: 1; margin: 0;
   }
-  .test-author { display: flex; align-items: center; gap: 10px; }
+
+  .test-author {
+    display: flex; align-items: center; gap: 11px;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 14px; margin-top: 4px;
+  }
   .test-avatar {
-    width: 40px; height: 40px; border-radius: 50%;
+    width: 42px; height: 42px; border-radius: 50%;
     overflow: hidden; border: 2px solid #f0f0f0; flex-shrink: 0;
   }
+  .test-avatar svg { display: block; }
   .test-name  { font-size: 13px; font-weight: 700; color: #111; }
-  .test-role  { font-size: 11px; color: #888; }
+  .test-role  { font-size: 11px; color: #999; margin-top: 1px; }
+
+  @media(max-width:768px) {
+    .test-arrow { display: none; }
+    .test-card { flex: 0 0 270px; }
+  }
+  @media(max-width:400px) {
+    .test-card { flex: 0 0 85vw; }
+  }
 </style>
 
-<!-- SECCIÓN TESTIMONIOS -->
+<!-- ── SECCIÓN TESTIMONIOS ── -->
 <section class="testimonios" id="testimonios">
 
-  <div class="sec-tag reveal">Testimonios</div>
-  <h2 class="sec-title reveal">
-    Lo que dicen<br>
-    <span>nuestros clientes</span>
-  </h2>
+  <div class="testimonios-header">
+    <div class="sec-tag reveal">Testimonios</div>
+    <h2 class="sec-title reveal d1">
+      Lo que dicen<br>
+      <span>nuestros clientes</span>
+    </h2>
+    <p class="sec-sub reveal d2">Clientes de Chillán, Concepción, Talcahuano y toda la región.</p>
+  </div>
 
-  <div class="test-grid">
+  <div class="test-carousel-wrap">
 
-    <!-- Testimonio 1 -->
-    <div class="test-card reveal">
-      <div class="test-stars">
-        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-        <i class="fas fa-star"></i><i class="fas fa-star"></i>
-      </div>
-      <p class="test-text">
-        Llevé 10 bolsas y el regalo de perlita fue genial. Mis tomates nunca habían crecido
-        tan bien. El sustrato es increíble, llevo 3 temporadas usándolo.
-      </p>
-      <div class="test-author">
-        <div class="test-avatar">
-          <!-- Avatar SVG generado -->
-          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
-            <rect width="40" height="40" fill="#d4c5a0"/>
-            <ellipse cx="20" cy="15" rx="7" ry="8" fill="#b8956a"/>
-            <path d="M12 10 Q16 5 20 7 Q24 5 28 10 Q30 8 27 17 Q20 21 13 17 Q10 8 12 10Z" fill="#5a3010"/>
-            <circle cx="17" cy="15" r="1.1" fill="#3d1a00"/>
-            <circle cx="23" cy="15" r="1.1" fill="#3d1a00"/>
-            <path d="M17 18.5 Q20 20.5 23 18.5" stroke="#7a3a10" stroke-width="1" fill="none" stroke-linecap="round"/>
-            <rect x="0" y="27" width="40" height="13" fill="#3d7a2e"/>
-            <ellipse cx="20" cy="27" rx="9" ry="4.5" fill="#3d7a2e"/>
-            <path d="M12 27 Q20 22 28 27" fill="#5a9e47"/>
-          </svg>
-        </div>
-        <div>
-          <div class="test-name">Claudia Moreno</div>
-          <div class="test-role">Huerta casera, Santiago</div>
-        </div>
-      </div>
-    </div>
+    <button class="test-arrow prev" id="testPrev" aria-label="Anterior">
+      <i class="fas fa-chevron-left"></i>
+    </button>
 
-    <!-- Testimonio 2 -->
-    <div class="test-card reveal">
-      <div class="test-stars">
-        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-        <i class="fas fa-star"></i><i class="fas fa-star"></i>
-      </div>
-      <p class="test-text">
-        Lo pedí por Instagram y en 2 días ya tenía mi sustrato en casa. Mis plantas de interior
-        están espectaculares. Super recomendado, muy buen servicio.
-      </p>
-      <div class="test-author">
-        <div class="test-avatar">
-          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
-            <rect width="40" height="40" fill="#c8a06a"/>
-            <ellipse cx="20" cy="15" rx="7" ry="8" fill="#a07040"/>
-            <ellipse cx="20" cy="11" rx="8" ry="4.5" fill="#3d1a00"/>
-            <circle cx="17" cy="15" r="1.1" fill="#3d1a00"/>
-            <circle cx="23" cy="15" r="1.1" fill="#3d1a00"/>
-            <path d="M17 19 Q20 21 23 19" stroke="#7a3a10" stroke-width="1" fill="none" stroke-linecap="round"/>
-            <rect x="0" y="27" width="40" height="13" fill="#1a4a8a"/>
-            <ellipse cx="20" cy="27" rx="9" ry="4.5" fill="#1a4a8a"/>
-            <path d="M12 27 Q20 22 28 27" fill="#2a6ac8"/>
-          </svg>
-        </div>
-        <div>
-          <div class="test-name">Rodrigo Silva</div>
-          <div class="test-role">Jardín, Valparaíso</div>
-        </div>
-      </div>
-    </div>
+    <div class="test-track" id="testTrack">
 
-    <!-- Testimonio 3 -->
-    <div class="test-card reveal">
-      <div class="test-stars">
-        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-        <i class="fas fa-star"></i><i class="fas fa-star"></i>
-      </div>
-      <p class="test-text">
-        El despacho fue súper rápido y el sustrato llegó perfecto. Ya llevo 6 pedidos y siempre
-        la misma calidad. La oferta de 10 bolsas es imperdible.
-      </p>
-      <div class="test-author">
-        <div class="test-avatar">
-          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
-            <rect width="40" height="40" fill="#e8c0a0"/>
-            <ellipse cx="20" cy="14" rx="7" ry="8" fill="#d4956a"/>
-            <path d="M13 11 Q18 5 20 8 Q22 5 27 11 Q30 9 27 18 Q20 22 13 18 Q10 9 13 11Z" fill="#2a0800"/>
-            <circle cx="17" cy="14" r="1.1" fill="#2a0800"/>
-            <circle cx="23" cy="14" r="1.1" fill="#2a0800"/>
-            <path d="M17 18 Q20 20 23 18" stroke="#7a3a10" stroke-width="1" fill="none" stroke-linecap="round"/>
-            <rect x="0" y="27" width="40" height="13" fill="#8a1a1a"/>
-            <ellipse cx="20" cy="27" rx="9" ry="4.5" fill="#8a1a1a"/>
-            <path d="M12 27 Q20 22 28 27" fill="#c02a2a"/>
-          </svg>
+      <!-- 1 -->
+      <div class="test-card">
+        <div class="test-city"><i class="fas fa-map-marker-alt"></i> Chillán</div>
+        <div class="test-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
         </div>
-        <div>
-          <div class="test-name">Ana Torres</div>
-          <div class="test-role">Huerta orgánica, Concepción</div>
+        <p class="test-text">Llevé 10 bolsas y el regalo de perlita fue genial. Mis tomates nunca habían crecido tan bien. Llevo 3 temporadas usándolo y siempre la misma calidad.</p>
+        <div class="test-author">
+          <div class="test-avatar">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" width="42" height="42">
+              <rect width="40" height="40" fill="#d4c5a0"/>
+              <ellipse cx="20" cy="15" rx="7" ry="8" fill="#b8956a"/>
+              <path d="M12 10 Q16 5 20 7 Q24 5 28 10 Q30 8 27 17 Q20 21 13 17 Q10 8 12 10Z" fill="#5a3010"/>
+              <circle cx="17" cy="15" r="1.1" fill="#3d1a00"/><circle cx="23" cy="15" r="1.1" fill="#3d1a00"/>
+              <path d="M17 18.5 Q20 20.5 23 18.5" stroke="#7a3a10" stroke-width="1" fill="none" stroke-linecap="round"/>
+              <rect x="0" y="27" width="40" height="13" fill="#3d7a2e"/>
+              <ellipse cx="20" cy="27" rx="9" ry="4.5" fill="#3d7a2e"/>
+              <path d="M12 27 Q20 22 28 27" fill="#5a9e47"/>
+            </svg>
+          </div>
+          <div><div class="test-name">Claudia Moreno</div><div class="test-role">Huerta casera, Chillán</div></div>
         </div>
       </div>
-    </div>
+
+      <!-- 2 -->
+      <div class="test-card">
+        <div class="test-city"><i class="fas fa-map-marker-alt"></i> Concepción</div>
+        <div class="test-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <p class="test-text">Lo pedí por Instagram y en 2 días ya tenía mi sustrato en casa. Mis plantas de interior están espectaculares. Super recomendado.</p>
+        <div class="test-author">
+          <div class="test-avatar">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" width="42" height="42">
+              <rect width="40" height="40" fill="#c8a06a"/>
+              <ellipse cx="20" cy="15" rx="7" ry="8" fill="#a07040"/>
+              <ellipse cx="20" cy="11" rx="8" ry="4.5" fill="#3d1a00"/>
+              <circle cx="17" cy="15" r="1.1" fill="#3d1a00"/><circle cx="23" cy="15" r="1.1" fill="#3d1a00"/>
+              <path d="M17 19 Q20 21 23 19" stroke="#7a3a10" stroke-width="1" fill="none" stroke-linecap="round"/>
+              <rect x="0" y="27" width="40" height="13" fill="#1a4a8a"/>
+              <ellipse cx="20" cy="27" rx="9" ry="4.5" fill="#1a4a8a"/>
+              <path d="M12 27 Q20 22 28 27" fill="#2a6ac8"/>
+            </svg>
+          </div>
+          <div><div class="test-name">Rodrigo Silva</div><div class="test-role">Jardín interior, Concepción</div></div>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="test-card">
+        <div class="test-city"><i class="fas fa-map-marker-alt"></i> Talcahuano</div>
+        <div class="test-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <p class="test-text">El despacho fue súper rápido y el sustrato llegó perfecto. Ya llevo 6 pedidos y siempre la misma calidad. La oferta de 10 bolsas es imperdible.</p>
+        <div class="test-author">
+          <div class="test-avatar">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" width="42" height="42">
+              <rect width="40" height="40" fill="#e8c0a0"/>
+              <ellipse cx="20" cy="14" rx="7" ry="8" fill="#d4956a"/>
+              <path d="M13 11 Q18 5 20 8 Q22 5 27 11 Q30 9 27 18 Q20 22 13 18 Q10 9 13 11Z" fill="#2a0800"/>
+              <circle cx="17" cy="14" r="1.1" fill="#2a0800"/><circle cx="23" cy="14" r="1.1" fill="#2a0800"/>
+              <path d="M17 18 Q20 20 23 18" stroke="#7a3a10" stroke-width="1" fill="none" stroke-linecap="round"/>
+              <rect x="0" y="27" width="40" height="13" fill="#8a1a1a"/>
+              <ellipse cx="20" cy="27" rx="9" ry="4.5" fill="#8a1a1a"/>
+              <path d="M12 27 Q20 22 28 27" fill="#c02a2a"/>
+            </svg>
+          </div>
+          <div><div class="test-name">Ana Torres</div><div class="test-role">Huerta orgánica, Talcahuano</div></div>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="test-card">
+        <div class="test-city"><i class="fas fa-map-marker-alt"></i> Los Ángeles</div>
+        <div class="test-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <p class="test-text">Excelente sustrato, mis plantas de tomate y pimentón crecieron muchísimo más rápido. Lo recomiendo a todos los que tienen huerta en casa.</p>
+        <div class="test-author">
+          <div class="test-avatar">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" width="42" height="42">
+              <rect width="40" height="40" fill="#b8d4a0"/>
+              <ellipse cx="20" cy="15" rx="7" ry="8" fill="#8ab870"/>
+              <ellipse cx="20" cy="12" rx="7" ry="5" fill="#3d1a00"/>
+              <circle cx="17" cy="16" r="1.1" fill="#2a0800"/><circle cx="23" cy="16" r="1.1" fill="#2a0800"/>
+              <path d="M17 19 Q20 21 23 19" stroke="#5a3010" stroke-width="1" fill="none" stroke-linecap="round"/>
+              <rect x="0" y="27" width="40" height="13" fill="#3d7a2e"/>
+              <ellipse cx="20" cy="27" rx="9" ry="4.5" fill="#3d7a2e"/>
+            </svg>
+          </div>
+          <div><div class="test-name">Patricia Fuentes</div><div class="test-role">Jardín familiar, Los Ángeles</div></div>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="test-card">
+        <div class="test-city"><i class="fas fa-map-marker-alt"></i> San Pedro de la Paz</div>
+        <div class="test-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <p class="test-text">Compré el pack de 10 bolsas con la perlita de regalo. Increíble la diferencia que hace en las plantas. El servicio al cliente es excelente.</p>
+        <div class="test-author">
+          <div class="test-avatar">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" width="42" height="42">
+              <rect width="40" height="40" fill="#d4b090"/>
+              <ellipse cx="20" cy="15" rx="7" ry="8" fill="#b08060"/>
+              <path d="M13 9 Q20 4 27 9 Q30 7 27 17 Q20 21 13 17 Q10 7 13 9Z" fill="#1a0a00"/>
+              <circle cx="17" cy="15" r="1.1" fill="#1a0a00"/><circle cx="23" cy="15" r="1.1" fill="#1a0a00"/>
+              <path d="M17 19 Q20 21 23 19" stroke="#5a2010" stroke-width="1" fill="none" stroke-linecap="round"/>
+              <rect x="0" y="27" width="40" height="13" fill="#8a4a1a"/>
+              <ellipse cx="20" cy="27" rx="9" ry="4.5" fill="#8a4a1a"/>
+              <path d="M12 27 Q20 22 28 27" fill="#aa6a3a"/>
+            </svg>
+          </div>
+          <div><div class="test-name">Carlos Muñoz</div><div class="test-role">Macetas y jardín, San Pedro</div></div>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="test-card">
+        <div class="test-city"><i class="fas fa-map-marker-alt"></i> Hualpén</div>
+        <div class="test-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <p class="test-text">Llevo más de 2 años comprando el sustrato y nunca me ha fallado. Mis plantas están preciosas todo el año. 100% recomendado.</p>
+        <div class="test-author">
+          <div class="test-avatar">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" width="42" height="42">
+              <rect width="40" height="40" fill="#f0d0b0"/>
+              <ellipse cx="20" cy="15" rx="7" ry="8" fill="#d4a080"/>
+              <path d="M13 8 Q17 3 20 6 Q23 3 27 8 Q30 6 27 17 Q20 22 13 17 Q10 6 13 8Z" fill="#4a1000"/>
+              <circle cx="17" cy="15" r="1.1" fill="#3a0800"/><circle cx="23" cy="15" r="1.1" fill="#3a0800"/>
+              <path d="M17 19 Q20 21 23 19" stroke="#6a2010" stroke-width="1" fill="none" stroke-linecap="round"/>
+              <rect x="0" y="27" width="40" height="13" fill="#2a6a8a"/>
+              <ellipse cx="20" cy="27" rx="9" ry="4.5" fill="#2a6a8a"/>
+              <path d="M12 27 Q20 22 28 27" fill="#3a8aaa"/>
+            </svg>
+          </div>
+          <div><div class="test-name">María José Riquelme</div><div class="test-role">Huerta urbana, Hualpén</div></div>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="test-card">
+        <div class="test-city"><i class="fas fa-map-marker-alt"></i> Penco</div>
+        <div class="test-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <p class="test-text">El sustrato llegó al día siguiente de pedirlo. Mis lechugas y acelgas están creciendo increíble. Muy buen producto y precio justo.</p>
+        <div class="test-author">
+          <div class="test-avatar">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" width="42" height="42">
+              <rect width="40" height="40" fill="#c0e0b0"/>
+              <ellipse cx="20" cy="15" rx="7" ry="8" fill="#90c080"/>
+              <ellipse cx="20" cy="11" rx="8" ry="5" fill="#2a5010"/>
+              <circle cx="17" cy="16" r="1.1" fill="#1a3000"/><circle cx="23" cy="16" r="1.1" fill="#1a3000"/>
+              <path d="M17 19 Q20 21 23 19" stroke="#3a6020" stroke-width="1" fill="none" stroke-linecap="round"/>
+              <rect x="0" y="27" width="40" height="13" fill="#4a8a3a"/>
+              <ellipse cx="20" cy="27" rx="9" ry="4.5" fill="#4a8a3a"/>
+              <path d="M12 27 Q20 22 28 27" fill="#6aaa5a"/>
+            </svg>
+          </div>
+          <div><div class="test-name">Diego Hernández</div><div class="test-role">Jardín, Penco</div></div>
+        </div>
+      </div>
+
+      <!-- 8 -->
+      <div class="test-card">
+        <div class="test-city"><i class="fas fa-map-marker-alt"></i> Tomé</div>
+        <div class="test-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <p class="test-text">Compré el formato XL para mi huerta y fue una inversión increíble. El certificado SAG me da mucha confianza. Volveré a comprar sin duda.</p>
+        <div class="test-author">
+          <div class="test-avatar">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" width="42" height="42">
+              <rect width="40" height="40" fill="#e0c8d0"/>
+              <ellipse cx="20" cy="15" rx="7" ry="8" fill="#c09090"/>
+              <path d="M13 9 Q18 4 22 7 Q26 4 27 9 Q30 8 27 17 Q20 22 13 17 Q10 8 13 9Z" fill="#5a0a20"/>
+              <circle cx="17" cy="15" r="1.1" fill="#3a0010"/><circle cx="23" cy="15" r="1.1" fill="#3a0010"/>
+              <path d="M17 19 Q20 21 23 19" stroke="#8a3050" stroke-width="1" fill="none" stroke-linecap="round"/>
+              <rect x="0" y="27" width="40" height="13" fill="#6a2a4a"/>
+              <ellipse cx="20" cy="27" rx="9" ry="4.5" fill="#6a2a4a"/>
+              <path d="M12 27 Q20 22 28 27" fill="#8a4a6a"/>
+            </svg>
+          </div>
+          <div><div class="test-name">Valentina Pérez</div><div class="test-role">Huerta grande, Tomé</div></div>
+        </div>
+      </div>
+
+    </div><!-- /track -->
+
+    <button class="test-arrow next" id="testNext" aria-label="Siguiente">
+      <i class="fas fa-chevron-right"></i>
+    </button>
 
   </div>
+
+  <!-- Dots -->
+  <div class="test-dots" id="testDots"></div>
+
 </section>
+
+<script>
+(function(){
+  const track  = document.getElementById('testTrack');
+  const prev   = document.getElementById('testPrev');
+  const next   = document.getElementById('testNext');
+  const dotsWrap = document.getElementById('testDots');
+  const cards  = track.querySelectorAll('.test-card');
+  const total  = cards.length;
+  let current  = 0;
+  let autoTimer;
+
+  /* Dots */
+  cards.forEach((_,i) => {
+    const d = document.createElement('button');
+    d.className = 'test-dot' + (i===0?' active':'');
+    d.addEventListener('click', () => { goTo(i); resetAuto(); });
+    dotsWrap.appendChild(d);
+  });
+
+  function updateDots(idx){
+    dotsWrap.querySelectorAll('.test-dot').forEach((d,i) => d.classList.toggle('active', i===idx));
+  }
+
+  function goTo(idx){
+    current = Math.max(0, Math.min(idx, total-1));
+    const card = cards[current];
+    const offset = card.offsetLeft - track.offsetLeft - (track.clientWidth/2 - card.clientWidth/2);
+    track.scrollTo({ left: offset, behavior: 'smooth' });
+    updateDots(current);
+  }
+
+  prev.addEventListener('click', () => { goTo(current-1); resetAuto(); });
+  next.addEventListener('click', () => { goTo(current+1); resetAuto(); });
+
+  /* Auto-play cada 3s */
+  function startAuto(){
+    autoTimer = setInterval(() => {
+      current = (current + 1) % total;
+      goTo(current);
+    }, 3000);
+  }
+  function resetAuto(){
+    clearInterval(autoTimer);
+    startAuto();
+  }
+  startAuto();
+
+  /* Pausa al hacer hover */
+  track.addEventListener('mouseenter', () => clearInterval(autoTimer));
+  track.addEventListener('mouseleave', () => startAuto());
+
+  /* Actualizar dot al scrollear manualmente */
+  let scrollTimer;
+  track.addEventListener('scroll', () => {
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      let closest = 0, minDist = Infinity;
+      cards.forEach((c,i) => {
+        const center = c.offsetLeft - track.scrollLeft + c.clientWidth/2;
+        const dist = Math.abs(center - track.clientWidth/2);
+        if(dist < minDist){ minDist = dist; closest = i; }
+      });
+      current = closest;
+      updateDots(current);
+    }, 80);
+  });
+
+  /* Drag mouse */
+  let isDrag = false, startX = 0, scrollStart = 0;
+  track.addEventListener('mousedown', e => {
+    isDrag = true; startX = e.pageX; scrollStart = track.scrollLeft;
+    track.classList.add('grabbing');
+    clearInterval(autoTimer);
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove', e => {
+    if(!isDrag) return;
+    track.scrollLeft = scrollStart - (e.pageX - startX);
+  });
+  document.addEventListener('mouseup', () => {
+    if(!isDrag) return;
+    isDrag = false;
+    track.classList.remove('grabbing');
+    let closest = 0, minDist = Infinity;
+    cards.forEach((c,i) => {
+      const center = c.offsetLeft - track.scrollLeft + c.clientWidth/2;
+      const dist = Math.abs(center - track.clientWidth/2);
+      if(dist < minDist){ minDist = dist; closest = i; }
+    });
+    goTo(closest);
+    startAuto();
+  });
+})();
+</script>
