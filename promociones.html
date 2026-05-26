@@ -1,0 +1,152 @@
+<!-- ============================================================
+     SECCIÓN 3: PROMOCIONES (promociones.html)
+     Incluye la barra naranja superior + la sección de oferta verde
+     Pégalo después de la portada en tu página
+     ============================================================ -->
+
+<style>
+  /* Barra de promoción */
+  .promo-strip {
+    background: var(--orange, #e8650a);
+    padding: 14px 5%;
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px; flex-wrap: wrap; text-align: center;
+  }
+  .promo-strip p {
+    color: #fff; font-size: 14px; font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .promo-strip strong { font-size: 16px; }
+  .promo-strip a {
+    background: #fff; color: var(--orange, #e8650a);
+    padding: 8px 20px; border-radius: 50px;
+    font-size: 13px; font-weight: 700;
+    text-decoration: none; white-space: nowrap; transition: all .3s;
+  }
+  .promo-strip a:hover { background: var(--yellow, #c8940a); color: #fff; }
+
+  /* Sección oferta principal */
+  .oferta {
+    background: linear-gradient(135deg, #2a5a1e, #3d7a2e);
+    padding: 70px 5%;
+    position: relative; overflow: hidden;
+  }
+  .oferta::before {
+    content: ''; position: absolute;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    border-radius: 50%; background: rgba(255,255,255,.04);
+  }
+  .oferta-inner {
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 40px; align-items: center;
+  }
+  .oferta-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+    color: #ffd066; padding: 6px 14px; border-radius: 50px;
+    font-size: 11px; font-weight: 700; letter-spacing: .5px;
+    text-transform: uppercase; margin-bottom: 18px;
+  }
+  .oferta h2 {
+    font-size: clamp(24px, 4vw, 40px);
+    font-weight: 900; color: #fff; line-height: 1.15; margin-bottom: 12px;
+  }
+  .oferta h2 span { color: #ffd066; }
+  .oferta > .oferta-inner > div > p {
+    font-size: 15px; color: rgba(255,255,255,.8);
+    line-height: 1.6; margin-bottom: 20px;
+  }
+  .oferta-includes { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+  .oferta-includes li {
+    display: flex; align-items: center; gap: 8px;
+    color: #fff; font-size: 14px; list-style: none;
+  }
+  .oferta-includes li i { color: #ffd066; font-size: 13px; }
+
+  /* Caja de precio/teléfono */
+  .oferta-price-box {
+    background: rgba(255,255,255,.12);
+    border: 2px solid rgba(255,255,255,.25);
+    border-radius: 20px; padding: 32px 36px;
+    text-align: center; flex-shrink: 0;
+  }
+  .oferta-price-box .label {
+    font-size: 12px; color: rgba(255,255,255,.7);
+    text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px;
+  }
+  .oferta-price-box .phone {
+    font-size: 22px; font-weight: 800; color: #ffd066; margin: 8px 0;
+  }
+  .oferta-price-box .note {
+    font-size: 11px; color: rgba(255,255,255,.6); margin-top: 4px; margin-bottom: 18px;
+  }
+
+  /* Botón WhatsApp */
+  .btn-wsp {
+    background: #25D366; color: #fff;
+    padding: 13px 24px; border-radius: 50px;
+    font-size: 14px; font-weight: 700;
+    text-decoration: none; display: flex;
+    align-items: center; justify-content: center; gap: 8px;
+    transition: all .3s;
+  }
+  .btn-wsp:hover { background: #20bd5a; transform: translateY(-2px); }
+
+  @media(max-width:700px) {
+    .oferta-inner { grid-template-columns: 1fr; }
+  }
+</style>
+
+<!-- BARRA DE PROMOCIÓN NARANJA (arriba) -->
+<div class="promo-strip">
+  <p>
+    <i class="fas fa-fire"></i>
+    <strong>OFERTA IMPERDIBLE:</strong>
+    Lleva 10 bolsas de 5 litros + 1 turba o perlita de regalo
+  </p>
+  <a href="https://wa.me/56956595642?text=Hola!%20Vi%20la%20oferta%20y%20quiero%20pedir">
+    <i class="fab fa-whatsapp"></i> Quiero esta oferta
+  </a>
+</div>
+
+<!-- SECCIÓN OFERTA PRINCIPAL -->
+<section class="oferta" id="oferta">
+  <div class="oferta-inner">
+
+    <!-- Columna izquierda: descripción -->
+    <div class="reveal">
+      <div class="oferta-badge">
+        <i class="fas fa-fire"></i> Oferta imperdible
+      </div>
+      <h2>
+        🌱 Lleva 10 bolsas<br>
+        y recibe <span>1 turba o perlita</span><br>
+        ¡de regalo!
+      </h2>
+      <p>Bolsas de 5 litros c/u. Ideal para huerta casera, macetas y jardín. Stock limitado.</p>
+      <ul class="oferta-includes">
+        <li><i class="fas fa-check"></i> 10 bolsas de sustrato 5 litros</li>
+        <li><i class="fas fa-check"></i> 1 bolsa de turba o perlita gratis</li>
+        <li><i class="fas fa-check"></i> Despacho coordinado por WhatsApp</li>
+        <li><i class="fas fa-check"></i> Certificado SAG incluido</li>
+      </ul>
+      <a href="https://wa.me/56956595642?text=Hola!%20Quiero%20la%20oferta%20de%2010%20bolsas%20m%C3%A1s%20regalo"
+         class="btn-wsp" style="width:fit-content;">
+        <i class="fab fa-whatsapp"></i> Pedir esta oferta ahora
+      </a>
+    </div>
+
+    <!-- Columna derecha: caja de contacto -->
+    <div class="oferta-price-box reveal">
+      <div class="label">Pedidos al</div>
+      <div class="phone">+56 9 5659 5642</div>
+      <div class="note">WhatsApp · Respuesta rápida</div>
+      <a href="https://wa.me/56956595642?text=Hola!%20Quiero%20hacer%20un%20pedido" class="btn-wsp">
+        <i class="fab fa-whatsapp"></i> Escribir ahora
+      </a>
+    </div>
+
+  </div>
+</section>
