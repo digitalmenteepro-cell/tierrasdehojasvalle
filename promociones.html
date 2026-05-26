@@ -1,20 +1,18 @@
 <!-- ============================================================
-     SECCIÓN 3: PROMOCIONES (promociones.html)
-     Incluye la barra naranja superior + la sección de oferta verde
-     Pégalo después de la portada en tu página
+     SECCIÓN: PROMOCIONES (promociones.html)
      ============================================================ -->
 
 <style>
-  /* Barra de promoción */
+  /* ── BARRA NARANJA SUPERIOR ── */
   .promo-strip {
     background: var(--orange, #e8650a);
-    padding: 14px 5%;
+    padding: 13px 5%;
     display: flex; align-items: center; justify-content: center;
     gap: 16px; flex-wrap: wrap; text-align: center;
   }
   .promo-strip p {
     color: #fff; font-size: 14px; font-weight: 600;
-    display: flex; align-items: center; gap: 8px;
+    display: flex; align-items: center; gap: 8px; margin: 0;
   }
   .promo-strip strong { font-size: 16px; }
   .promo-strip a {
@@ -25,81 +23,271 @@
   }
   .promo-strip a:hover { background: var(--yellow, #c8940a); color: #fff; }
 
-  /* Sección oferta principal */
+  /* ── SECCIÓN OFERTA ── */
   .oferta {
-    background: linear-gradient(135deg, #2a5a1e, #3d7a2e);
-    padding: 70px 5%;
-    position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #1e4212 0%, #2d6320 40%, #3d7a2e 100%);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
   }
+
+  /* Círculos decorativos de fondo */
   .oferta::before {
-    content: ''; position: absolute;
-    top: -100px; right: -100px;
-    width: 400px; height: 400px;
-    border-radius: 50%; background: rgba(255,255,255,.04);
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.04);
+    pointer-events: none;
   }
-  .oferta-inner {
-    max-width: 900px; margin: 0 auto;
-    display: grid; grid-template-columns: 1fr auto;
-    gap: 40px; align-items: center;
+  .oferta::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.03);
+    pointer-events: none;
   }
-  .oferta-badge {
+
+  /* Grid principal: imagen | contenido */
+  .oferta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── IMAGEN IZQUIERDA ── */
+  .oferta-img-col {
+    position: relative;
+    overflow: hidden;
+    min-height: 520px;
+  }
+  .oferta-img-col img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transition: transform .6s cubic-bezier(.16,1,.3,1);
+  }
+  .oferta-img-col:hover img { transform: scale(1.04); }
+
+  /* Gradiente derecho sobre la imagen para fusión */
+  .oferta-img-col::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      transparent 55%,
+      rgba(45,99,32,.6) 80%,
+      rgba(45,99,32,1) 100%
+    );
+    pointer-events: none;
+  }
+
+  /* Badge sobre la imagen */
+  .oferta-img-badge {
+    position: absolute;
+    top: 24px; left: 24px;
+    z-index: 10;
+    background: rgba(255,255,255,.95);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    box-shadow: 0 6px 24px rgba(0,0,0,.18);
+  }
+  .oferta-img-badge-icon {
+    width: 34px; height: 34px;
+    background: rgba(61,122,46,.1);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; color: #3d7a2e;
+    flex-shrink: 0;
+  }
+  .oferta-img-badge-t {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px; font-weight: 700; color: #111;
+    line-height: 1.2;
+  }
+  .oferta-img-badge-s {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px; color: #888;
+  }
+
+  /* Tag oferta abajo izquierda */
+  .oferta-fire-tag {
+    position: absolute;
+    bottom: 24px; left: 24px;
+    z-index: 10;
+    background: var(--orange, #e8650a);
+    color: #fff;
+    border-radius: 50px;
+    padding: 7px 16px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; gap: 6px;
+    box-shadow: 0 4px 16px rgba(232,101,10,.4);
+  }
+
+  /* ── CONTENIDO DERECHO ── */
+  .oferta-content {
+    padding: 60px 6% 60px 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .oferta-eyebrow {
     display: inline-flex; align-items: center; gap: 7px;
     background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
     color: #ffd066; padding: 6px 14px; border-radius: 50px;
     font-size: 11px; font-weight: 700; letter-spacing: .5px;
-    text-transform: uppercase; margin-bottom: 18px;
+    text-transform: uppercase; width: fit-content;
   }
-  .oferta h2 {
-    font-size: clamp(24px, 4vw, 40px);
-    font-weight: 900; color: #fff; line-height: 1.15; margin-bottom: 12px;
+
+  .oferta-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(26px, 3.5vw, 42px);
+    font-weight: 900; color: #fff; line-height: 1.15;
+    margin: 0;
   }
-  .oferta h2 span { color: #ffd066; }
-  .oferta > .oferta-inner > div > p {
-    font-size: 15px; color: rgba(255,255,255,.8);
-    line-height: 1.6; margin-bottom: 20px;
+  .oferta-title span { color: #ffd066; }
+
+  .oferta-desc {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px; color: rgba(255,255,255,.75);
+    line-height: 1.65; margin: 0;
   }
-  .oferta-includes { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+
+  /* Lista de includes */
+  .oferta-includes {
+    display: flex; flex-direction: column; gap: 10px;
+    list-style: none; margin: 0; padding: 0;
+  }
   .oferta-includes li {
-    display: flex; align-items: center; gap: 8px;
-    color: #fff; font-size: 14px; list-style: none;
+    display: flex; align-items: center; gap: 10px;
+    color: #fff; font-size: 14px;
+    font-family: 'Poppins', sans-serif;
   }
-  .oferta-includes li i { color: #ffd066; font-size: 13px; }
-
-  /* Caja de precio/teléfono */
-  .oferta-price-box {
-    background: rgba(255,255,255,.12);
-    border: 2px solid rgba(255,255,255,.25);
-    border-radius: 20px; padding: 32px 36px;
-    text-align: center; flex-shrink: 0;
+  .oferta-includes li .check-icon {
+    width: 22px; height: 22px;
+    background: rgba(255,208,102,.15);
+    border: 1px solid rgba(255,208,102,.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
   }
-  .oferta-price-box .label {
-    font-size: 12px; color: rgba(255,255,255,.7);
-    text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px;
-  }
-  .oferta-price-box .phone {
-    font-size: 22px; font-weight: 800; color: #ffd066; margin: 8px 0;
-  }
-  .oferta-price-box .note {
-    font-size: 11px; color: rgba(255,255,255,.6); margin-top: 4px; margin-bottom: 18px;
+  .oferta-includes li .check-icon i {
+    color: #ffd066; font-size: 10px;
   }
 
-  /* Botón WhatsApp */
-  .btn-wsp {
+  /* Separador */
+  .oferta-sep {
+    height: 1px;
+    background: rgba(255,255,255,.1);
+    border-radius: 1px;
+  }
+
+  /* Caja de contacto */
+  .oferta-contact-box {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 18px;
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .oferta-phone-wrap .lbl {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .7px;
+    color: rgba(255,255,255,.5); margin-bottom: 4px;
+  }
+  .oferta-phone-wrap .phone {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px; font-weight: 800; color: #ffd066;
+    line-height: 1;
+  }
+  .oferta-phone-wrap .sub {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px; color: rgba(255,255,255,.45); margin-top: 3px;
+  }
+
+  /* Botones */
+  .btn-oferta-wsp {
+    display: inline-flex; align-items: center; gap: 8px;
     background: #25D366; color: #fff;
     padding: 13px 24px; border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
     font-size: 14px; font-weight: 700;
-    text-decoration: none; display: flex;
-    align-items: center; justify-content: center; gap: 8px;
-    transition: all .3s;
+    text-decoration: none;
+    box-shadow: 0 6px 22px rgba(37,211,102,.35);
+    transition: all .3s; white-space: nowrap;
   }
-  .btn-wsp:hover { background: #20bd5a; transform: translateY(-2px); }
+  .btn-oferta-wsp:hover {
+    background: #1faa55;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(37,211,102,.45);
+  }
 
-  @media(max-width:700px) {
-    .oferta-inner { grid-template-columns: 1fr; }
+  .btn-oferta-main {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #25D366; color: #fff;
+    padding: 15px 28px; border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px; font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 8px 28px rgba(37,211,102,.4);
+    transition: all .3s; width: fit-content;
+  }
+  .btn-oferta-main:hover {
+    background: #1faa55;
+    transform: translateY(-3px);
+    box-shadow: 0 14px 36px rgba(37,211,102,.5);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:860px) {
+    .oferta-grid { grid-template-columns: 1fr; }
+    .oferta-img-col {
+      min-height: 300px;
+      max-height: 360px;
+    }
+    .oferta-img-col::after {
+      background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(45,99,32,.7) 80%,
+        rgba(45,99,32,1) 100%
+      );
+    }
+    .oferta-content { padding: 40px 5% 50px; }
+    .oferta-contact-box { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media(max-width:480px) {
+    .oferta-img-col { min-height: 240px; max-height: 280px; }
+    .oferta-title { font-size: 26px; }
+    .oferta-contact-box { padding: 18px 20px; }
+    .btn-oferta-main { width: 100%; justify-content: center; }
+    .btn-oferta-wsp { width: 100%; justify-content: center; }
   }
 </style>
 
-<!-- BARRA DE PROMOCIÓN NARANJA (arriba) -->
+<!-- ── BARRA NARANJA SUPERIOR ── -->
 <div class="promo-strip">
   <p>
     <i class="fas fa-fire"></i>
@@ -111,42 +299,91 @@
   </a>
 </div>
 
-<!-- SECCIÓN OFERTA PRINCIPAL -->
+<!-- ── SECCIÓN OFERTA ── -->
 <section class="oferta" id="oferta">
-  <div class="oferta-inner">
+  <div class="oferta-grid">
 
-    <!-- Columna izquierda: descripción -->
-    <div class="reveal">
-      <div class="oferta-badge">
-        <i class="fas fa-fire"></i> Oferta imperdible
+    <!-- COLUMNA IMAGEN -->
+    <div class="oferta-img-col reveal">
+      <img
+        src="https://raw.githubusercontent.com/digitalmenteepro-cell/tierrasdehojasvalle/refs/heads/main/foto%20pro.jpeg"
+        alt="Sustrato Tierra de Hojas Valle"
+      />
+
+      <!-- Badge SAG sobre imagen -->
+      <div class="oferta-img-badge">
+        <div class="oferta-img-badge-icon">
+          <i class="fas fa-certificate"></i>
+        </div>
+        <div>
+          <div class="oferta-img-badge-t">Cert. SAG</div>
+          <div class="oferta-img-badge-s">Oficial Chile</div>
+        </div>
       </div>
-      <h2>
-        🌱 Lleva 10 bolsas<br>
+
+      <!-- Tag fuego abajo -->
+      <div class="oferta-fire-tag">
+        <i class="fas fa-fire"></i> Oferta limitada
+      </div>
+    </div>
+
+    <!-- COLUMNA CONTENIDO -->
+    <div class="oferta-content reveal d2">
+
+      <div class="oferta-eyebrow">
+        <i class="fas fa-star" style="color:#ffd066"></i> Oferta imperdible
+      </div>
+
+      <h2 class="oferta-title">
+        Lleva 10 bolsas<br>
         y recibe <span>1 turba o perlita</span><br>
         ¡de regalo!
       </h2>
-      <p>Bolsas de 5 litros c/u. Ideal para huerta casera, macetas y jardín. Stock limitado.</p>
+
+      <p class="oferta-desc">
+        Bolsas de 5 litros c/u. Ideal para huerta casera, macetas y jardín.
+        Stock limitado — ¡aprovecha ahora!
+      </p>
+
       <ul class="oferta-includes">
-        <li><i class="fas fa-check"></i> 10 bolsas de sustrato 5 litros</li>
-        <li><i class="fas fa-check"></i> 1 bolsa de turba o perlita gratis</li>
-        <li><i class="fas fa-check"></i> Despacho coordinado por WhatsApp</li>
-        <li><i class="fas fa-check"></i> Certificado SAG incluido</li>
+        <li>
+          <span class="check-icon"><i class="fas fa-check"></i></span>
+          10 bolsas de sustrato 5 litros
+        </li>
+        <li>
+          <span class="check-icon"><i class="fas fa-check"></i></span>
+          1 bolsa de turba o perlita gratis
+        </li>
+        <li>
+          <span class="check-icon"><i class="fas fa-check"></i></span>
+          Despacho coordinado por WhatsApp
+        </li>
+        <li>
+          <span class="check-icon"><i class="fas fa-check"></i></span>
+          Certificado SAG incluido
+        </li>
       </ul>
+
       <a href="https://wa.me/56956595642?text=Hola!%20Quiero%20la%20oferta%20de%2010%20bolsas%20m%C3%A1s%20regalo"
-         class="btn-wsp" style="width:fit-content;">
+         class="btn-oferta-main">
         <i class="fab fa-whatsapp"></i> Pedir esta oferta ahora
       </a>
-    </div>
 
-    <!-- Columna derecha: caja de contacto -->
-    <div class="oferta-price-box reveal">
-      <div class="label">Pedidos al</div>
-      <div class="phone">+56 9 5659 5642</div>
-      <div class="note">WhatsApp · Respuesta rápida</div>
-      <a href="https://wa.me/56956595642?text=Hola!%20Quiero%20hacer%20un%20pedido" class="btn-wsp">
-        <i class="fab fa-whatsapp"></i> Escribir ahora
-      </a>
-    </div>
+      <div class="oferta-sep"></div>
 
+      <!-- Caja contacto -->
+      <div class="oferta-contact-box">
+        <div class="oferta-phone-wrap">
+          <div class="lbl">Pedidos al</div>
+          <div class="phone">+56 9 5659 5642</div>
+          <div class="sub">WhatsApp · Respuesta rápida</div>
+        </div>
+        <a href="https://wa.me/56956595642?text=Hola!%20Quiero%20hacer%20un%20pedido"
+           class="btn-oferta-wsp">
+          <i class="fab fa-whatsapp"></i> Escribir ahora
+        </a>
+      </div>
+
+    </div>
   </div>
 </section>
