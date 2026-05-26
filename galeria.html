@@ -1,7 +1,5 @@
 <!-- ============================================================
      SECCIÓN 6: GALERÍA (galeria.html)
-     Grid de 3 fotos con efecto hover
-     Pégalo después de los beneficios
      ============================================================ -->
 
 <style>
@@ -34,7 +32,6 @@
     color: #fff; font-size: 13px; font-weight: 700;
     display: flex; align-items: center; gap: 6px;
   }
-
   @media(max-width:600px) {
     .gal-grid { grid-template-columns: 1fr 1fr; }
   }
@@ -42,7 +39,6 @@
 
 <!-- SECCIÓN GALERÍA -->
 <section class="galeria" id="galeria">
-
   <div class="sec-tag reveal">Nuestro trabajo</div>
   <h2 class="sec-title reveal">
     Tus plantas siguen creciendo...<br>
@@ -54,33 +50,36 @@
 
   <div class="gal-grid">
 
-    <div class="gal-item reveal">
+    <!-- Foto 1 -->
+    <div class="gal-item reveal d1">
       <img
-        src="https://raw.githubusercontent.com/digitalmenteepro-cell/tierradehojasvalle/main/img/IMG_7284.jpg"
-        alt="Sustrato Tierra de Hojas Valle en acción"
+        src="https://raw.githubusercontent.com/digitalmenteepro-cell/tierrasdehojasvalle/refs/heads/main/sustrato%20en%20accion.jpg"
+        alt="Sustrato Carpediem en acción"
       />
       <div class="gal-overlay">
-        <span><i class="fas fa-leaf"></i> Sustrato en acción</span>
+        <span><i class="fas fa-seedling"></i> Sustrato en acción</span>
       </div>
     </div>
 
-    <div class="gal-item reveal">
+    <!-- Foto 2 -->
+    <div class="gal-item reveal d2">
       <img
-        src="https://raw.githubusercontent.com/digitalmenteepro-cell/tierradehojasvalle/main/img/IMG_7285.jpg"
-        alt="Familia cuidando plantas con sustrato Valle"
+        src="https://raw.githubusercontent.com/digitalmenteepro-cell/tierrasdehojasvalle/refs/heads/main/galeria%202.jpeg"
+        alt="Productos Tierra de Hojas Valle"
       />
       <div class="gal-overlay">
-        <span><i class="fas fa-box"></i> Bolsas disponibles</span>
+        <span><i class="fas fa-box"></i> Nuestros productos</span>
       </div>
     </div>
 
-    <div class="gal-item reveal">
+    <!-- Foto 3 -->
+    <div class="gal-item reveal d3">
       <img
-        src="https://raw.githubusercontent.com/digitalmenteepro-cell/tierradehojasvalle/main/img/IMG_7287.jpg"
-        alt="Producto Carpediem certificado SAG"
+        src="https://raw.githubusercontent.com/digitalmenteepro-cell/tierrasdehojasvalle/refs/heads/main/Galeria%203.png"
+        alt="Sustrato certificado SAG Tierra de Hojas Valle"
       />
       <div class="gal-overlay">
-        <span><i class="fas fa-certificate"></i> Cert. SAG</span>
+        <span><i class="fas fa-truck"></i> Reparto en acción</span>
       </div>
     </div>
 
