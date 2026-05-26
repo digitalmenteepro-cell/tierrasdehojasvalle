@@ -1,0 +1,160 @@
+<!-- ============================================================
+     SECCIÓN 2: PORTADA / HERO (portada.html)
+     Copia todo este bloque después del nav en tu página
+     ============================================================ -->
+
+<style>
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 80px 0 0;
+    overflow: hidden;
+  }
+  .hero-left {
+    padding: 60px 5% 60px 7%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: fadeUp .7s ease both;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(61,122,46,.1); border: 1px solid rgba(61,122,46,.2);
+    color: var(--green, #3d7a2e);
+    padding: 7px 16px; border-radius: 50px;
+    font-size: 12px; font-weight: 700; letter-spacing: .5px;
+    text-transform: uppercase; margin-bottom: 22px; width: fit-content;
+  }
+  h1.hero-h1 {
+    font-size: clamp(32px, 4.5vw, 56px);
+    font-weight: 900; line-height: 1.1; color: #111; margin-bottom: 18px;
+  }
+  h1.hero-h1 .green  { color: var(--green, #3d7a2e); }
+  h1.hero-h1 .orange { color: var(--orange, #e8650a); }
+  .hero-sub {
+    font-size: 16px; color: #555; line-height: 1.7;
+    margin-bottom: 28px; max-width: 480px;
+  }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+  .btn-main {
+    background: var(--green, #3d7a2e); color: #fff;
+    padding: 14px 28px; border-radius: 50px;
+    font-size: 15px; font-weight: 700;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: all .3s;
+  }
+  .btn-main:hover {
+    background: var(--green-light, #5a9e47);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(61,122,46,.35);
+  }
+  .btn-outline {
+    background: #fff; color: var(--green, #3d7a2e);
+    padding: 14px 28px; border-radius: 50px;
+    font-size: 15px; font-weight: 600;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: all .3s; border: 2px solid var(--green, #3d7a2e);
+  }
+  .btn-outline:hover {
+    background: var(--green, #3d7a2e); color: #fff;
+    transform: translateY(-2px);
+  }
+  .hero-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero-badge-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: #444; font-weight: 500; }
+  .hero-badge-item i { color: var(--green, #3d7a2e); font-size: 14px; }
+
+  .hero-right {
+    position: relative; height: 100%; min-height: 500px; overflow: hidden;
+  }
+  .hero-img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(255,255,255,.3) 0%, transparent 30%);
+  }
+  /* Etiquetas flotantes sobre la imagen */
+  .hero-tag-float {
+    position: absolute;
+    background: rgba(255,255,255,.95);
+    border-radius: 10px; padding: 8px 13px;
+    font-size: 12px; font-weight: 700;
+    box-shadow: 0 4px 16px rgba(0,0,0,.15);
+    white-space: nowrap;
+  }
+
+  @media(max-width:900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 300px; }
+    .hero-left { padding: 40px 5%; }
+  }
+</style>
+
+<!-- SECCIÓN HERO / PORTADA -->
+<section class="hero" id="inicio">
+
+  <!-- Columna izquierda: texto -->
+  <div class="hero-left">
+    <div class="hero-tag">
+      <i class="fas fa-certificate"></i> Certificado SAG
+    </div>
+    <h1 class="hero-h1">
+      Más que tierra,<br>
+      <span class="green">es vida</span> para<br>
+      tus <span class="orange">plantas</span>
+    </h1>
+    <p class="hero-sub">
+      Sustrato orgánico 100% natural con compost, perlita y turba.
+      Certificado SAG. Despacho a domicilio en todo Chile.
+    </p>
+    <div class="hero-btns">
+      <a href="https://wa.me/56956595642?text=Hola!%20Quiero%20hacer%20un%20pedido" class="btn-main">
+        <i class="fab fa-whatsapp"></i> Hacer pedido
+      </a>
+      <a href="#producto" class="btn-outline">
+        <i class="fas fa-leaf"></i> Ver producto
+      </a>
+    </div>
+    <div class="hero-badges">
+      <div class="hero-badge-item"><i class="fas fa-check-circle"></i> Despacho a domicilio</div>
+      <div class="hero-badge-item"><i class="fas fa-check-circle"></i> 10 años de experiencia</div>
+      <div class="hero-badge-item"><i class="fas fa-check-circle"></i> 3.500+ seguidores</div>
+    </div>
+  </div>
+
+  <!-- Columna derecha: imagen con etiquetas flotantes -->
+  <div class="hero-right">
+    <img
+      src="https://raw.githubusercontent.com/digitalmenteepro-cell/tierradehojasvalle/main/img/IMG_7286.jpg"
+      alt="Sustrato Carpediem - Tierra de Hojas Valle"
+      class="hero-img"
+    />
+    <div class="hero-overlay"></div>
+
+    <!-- Etiqueta: Compost orgánico -->
+    <div class="hero-tag-float" style="top:14%;left:4%;border:2px solid #3d7a2e;color:#2a5a1e;">
+      <i class="fas fa-seedling" style="color:#3d7a2e;margin-right:5px"></i>Compost orgánico
+    </div>
+
+    <!-- Etiqueta: Perlita premium -->
+    <div class="hero-tag-float" style="top:38%;right:3%;border:2px solid #e8650a;color:#b84e00;">
+      <i class="fas fa-circle" style="color:#e8650a;margin-right:5px;font-size:9px"></i>Perlita premium
+    </div>
+
+    <!-- Etiqueta: Turba natural -->
+    <div class="hero-tag-float" style="bottom:22%;left:4%;border:2px solid #3d7a2e;color:#2a5a1e;">
+      <i class="fas fa-layer-group" style="color:#3d7a2e;margin-right:5px"></i>Turba natural
+    </div>
+
+    <!-- Etiqueta: Certificado SAG -->
+    <div style="position:absolute;bottom:6%;right:4%;background:#3d7a2e;border-radius:10px;padding:9px 14px;font-size:11px;font-weight:700;color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.2);">
+      <i class="fas fa-shield-alt" style="margin-right:5px"></i>Cert. SAG ✓
+    </div>
+  </div>
+
+</section>
