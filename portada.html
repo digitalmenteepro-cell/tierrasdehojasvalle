@@ -1,160 +1,586 @@
 <!-- ============================================================
-     SECCIÓN 2: PORTADA / HERO (portada.html)
-     Copia todo este bloque después del nav en tu página
+     SECCIÓN: PORTADA / HERO — Edición Premium v2
      ============================================================ -->
 
 <style>
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
+  /* ── HERO ── */
   .hero {
+    position: relative;
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    align-items: center;
-    padding: 80px 0 0;
     overflow: hidden;
+    background: #060f04;
   }
+
+  /* ════════════════════════════════
+     LADO IZQUIERDO — Texto
+  ════════════════════════════════ */
   .hero-left {
-    padding: 60px 5% 60px 7%;
+    position: relative;
+    z-index: 10;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    animation: fadeUp .7s ease both;
+    padding: 100px 6% 80px 7%;
+    background: linear-gradient(135deg, #060f04 60%, rgba(6,15,4,.85) 100%);
   }
-  .hero-tag {
-    display: inline-flex; align-items: center; gap: 7px;
-    background: rgba(61,122,46,.1); border: 1px solid rgba(61,122,46,.2);
-    color: var(--green, #3d7a2e);
-    padding: 7px 16px; border-radius: 50px;
-    font-size: 12px; font-weight: 700; letter-spacing: .5px;
-    text-transform: uppercase; margin-bottom: 22px; width: fit-content;
-  }
-  h1.hero-h1 {
-    font-size: clamp(32px, 4.5vw, 56px);
-    font-weight: 900; line-height: 1.1; color: #111; margin-bottom: 18px;
-  }
-  h1.hero-h1 .green  { color: var(--green, #3d7a2e); }
-  h1.hero-h1 .orange { color: var(--orange, #e8650a); }
-  .hero-sub {
-    font-size: 16px; color: #555; line-height: 1.7;
-    margin-bottom: 28px; max-width: 480px;
-  }
-  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
-  .btn-main {
-    background: var(--green, #3d7a2e); color: #fff;
-    padding: 14px 28px; border-radius: 50px;
-    font-size: 15px; font-weight: 700;
-    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
-    transition: all .3s;
-  }
-  .btn-main:hover {
-    background: var(--green-light, #5a9e47);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(61,122,46,.35);
-  }
-  .btn-outline {
-    background: #fff; color: var(--green, #3d7a2e);
-    padding: 14px 28px; border-radius: 50px;
-    font-size: 15px; font-weight: 600;
-    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
-    transition: all .3s; border: 2px solid var(--green, #3d7a2e);
-  }
-  .btn-outline:hover {
-    background: var(--green, #3d7a2e); color: #fff;
-    transform: translateY(-2px);
-  }
-  .hero-badges { display: flex; gap: 14px; flex-wrap: wrap; }
-  .hero-badge-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: #444; font-weight: 500; }
-  .hero-badge-item i { color: var(--green, #3d7a2e); font-size: 14px; }
 
-  .hero-right {
-    position: relative; height: 100%; min-height: 500px; overflow: hidden;
-  }
-  .hero-img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
-  .hero-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to right, rgba(255,255,255,.3) 0%, transparent 30%);
-  }
-  /* Etiquetas flotantes sobre la imagen */
-  .hero-tag-float {
+  /* Línea decorativa izquierda */
+  .hero-left::before {
+    content: '';
     position: absolute;
-    background: rgba(255,255,255,.95);
-    border-radius: 10px; padding: 8px 13px;
-    font-size: 12px; font-weight: 700;
-    box-shadow: 0 4px 16px rgba(0,0,0,.15);
+    left: 0; top: 15%; bottom: 15%;
+    width: 3px;
+    background: linear-gradient(to bottom, transparent, #a8d66e 30%, #3d7a2e 70%, transparent);
+    border-radius: 2px;
+  }
+
+  /* Eyebrow */
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: slideRight .7s cubic-bezier(.16,1,.3,1) .3s forwards;
+  }
+  .hero-eyebrow-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(168,214,110,.1);
+    border: 1px solid rgba(168,214,110,.25);
+    color: #a8d66e;
+    padding: 5px 14px;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .hero-eyebrow-pill i { font-size: 9px; }
+  .hero-eyebrow-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: rgba(168,214,110,.4);
+  }
+  .hero-eyebrow-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(168,214,110,.3), transparent);
+    max-width: 60px;
+  }
+
+  /* Título */
+  .hero-h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    line-height: 1.05;
+    color: #fff;
+    margin-bottom: 22px;
+    opacity: 0;
+    animation: slideRight .8s cubic-bezier(.16,1,.3,1) .45s forwards;
+  }
+  .hero-h1 .line1 {
+    display: block;
+    font-size: clamp(36px, 4.5vw, 62px);
+    color: rgba(255,255,255,.75);
+    font-weight: 700;
+    font-style: italic;
+  }
+  .hero-h1 .line2 {
+    display: block;
+    font-size: clamp(48px, 6vw, 82px);
+    color: #fff;
+    line-height: .95;
+  }
+  .hero-h1 .line3 {
+    display: block;
+    font-size: clamp(36px, 4.5vw, 60px);
+    color: transparent;
+    -webkit-text-stroke: 1.5px #a8d66e;
+    font-style: italic;
+  }
+
+  /* Separador decorativo */
+  .hero-sep {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0;
+    opacity: 0;
+    animation: slideRight .7s cubic-bezier(.16,1,.3,1) .6s forwards;
+  }
+  .hero-sep-line {
+    height: 1px;
+    width: 40px;
+    background: rgba(168,214,110,.4);
+  }
+  .hero-sep-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,.4);
+    letter-spacing: .5px;
+  }
+
+  /* Subtítulo */
+  .hero-sub {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: rgba(255,255,255,.55);
+    line-height: 1.8;
+    max-width: 400px;
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: slideRight .8s cubic-bezier(.16,1,.3,1) .6s forwards;
+  }
+
+  /* Botones */
+  .hero-btns {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 44px;
+    opacity: 0;
+    animation: slideRight .8s cubic-bezier(.16,1,.3,1) .75s forwards;
+  }
+  .hero-btn-wsp {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: #25D366;
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 8px 28px rgba(37,211,102,.4);
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-btn-wsp::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,.15) 0%, transparent 60%);
+  }
+  .hero-btn-wsp:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 36px rgba(37,211,102,.5);
+    background: #20bd5a;
+  }
+  .hero-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: rgba(255,255,255,.7);
+    padding: 15px 26px;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,.18);
+    transition: all .3s;
+    backdrop-filter: blur(4px);
+  }
+  .hero-btn-ghost:hover {
+    background: rgba(255,255,255,.08);
+    border-color: rgba(255,255,255,.35);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  /* Stats */
+  .hero-stats {
+    display: flex;
+    gap: 0;
+    opacity: 0;
+    animation: slideRight .8s cubic-bezier(.16,1,.3,1) .9s forwards;
+    border: 1px solid rgba(168,214,110,.1);
+    border-radius: 16px;
+    overflow: hidden;
+    width: fit-content;
+    background: rgba(168,214,110,.03);
+  }
+  .hero-stat {
+    padding: 14px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border-right: 1px solid rgba(168,214,110,.1);
+  }
+  .hero-stat:last-child { border-right: none; }
+  .hero-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+  }
+  .hero-stat-num span { color: #a8d66e; }
+  .hero-stat-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    color: rgba(255,255,255,.35);
     white-space: nowrap;
   }
 
+  /* ════════════════════════════════
+     LADO DERECHO — Imagen
+  ════════════════════════════════ */
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-img-wrap {
+    position: absolute;
+    inset: 0;
+  }
+  .hero-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+    transform: scale(1.08);
+    animation: imgReveal 1.8s cubic-bezier(.16,1,.3,1) .1s forwards;
+  }
+  @keyframes imgReveal {
+    to { transform: scale(1.0); }
+  }
+
+  /* Gradiente de transición izquierdo */
+  .hero-img-fade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      #060f04 0%,
+      rgba(6,15,4,.5) 20%,
+      transparent 50%
+    );
+    z-index: 2;
+  }
+  /* Gradiente inferior sutil */
+  .hero-img-fade-bottom {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(6,15,4,.6) 0%,
+      transparent 40%
+    );
+    z-index: 2;
+  }
+
+  /* Badges flotantes sobre la imagen */
+  .float-badge {
+    position: absolute;
+    z-index: 10;
+    background: rgba(255,255,255,.93);
+    backdrop-filter: blur(16px);
+    border-radius: 14px;
+    padding: 11px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.2), 0 0 0 1px rgba(255,255,255,.5);
+    opacity: 0;
+    animation: popIn .5s cubic-bezier(.34,1.56,.64,1) forwards;
+  }
+  .float-badge-icon {
+    width: 34px; height: 34px;
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+  .float-badge-body { line-height: 1.25; }
+  .float-badge-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px; font-weight: 700; color: #111;
+  }
+  .float-badge-sub {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px; color: #888;
+  }
+
+  .fb-sag   { top: 14%; right: 6%; animation-delay: 1.0s; }
+  .fb-org   { top: 42%; right: 6%; animation-delay: 1.2s; }
+  .fb-truck { bottom: 20%; right: 6%; animation-delay: 1.4s; }
+
+  /* Scroll hint */
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0;
+    animation: fadeUp .6s ease 1.8s forwards;
+  }
+  .scroll-mouse {
+    width: 22px; height: 34px;
+    border: 2px solid rgba(255,255,255,.25);
+    border-radius: 11px;
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+  }
+  .scroll-wheel {
+    width: 3px; height: 7px;
+    background: rgba(255,255,255,.5);
+    border-radius: 2px;
+    animation: scrollWheel 1.8s ease-in-out infinite;
+  }
+  .scroll-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.3);
+  }
+
+  @keyframes scrollWheel {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    60%       { transform: translateY(8px); opacity: 0; }
+  }
+
+  /* Partículas */
+  .hero-particles {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .ptcl {
+    position: absolute;
+    border-radius: 50%;
+    animation: ptclFloat linear infinite;
+  }
+  .ptcl:nth-child(1){ width:3px;height:3px;left:10%;background:rgba(168,214,110,.3);animation-duration:14s;animation-delay:0s; }
+  .ptcl:nth-child(2){ width:4px;height:4px;left:25%;background:rgba(168,214,110,.2);animation-duration:18s;animation-delay:3s; }
+  .ptcl:nth-child(3){ width:2px;height:2px;left:60%;background:rgba(168,214,110,.25);animation-duration:12s;animation-delay:1s; }
+  .ptcl:nth-child(4){ width:3px;height:3px;left:80%;background:rgba(168,214,110,.2);animation-duration:16s;animation-delay:5s; }
+  .ptcl:nth-child(5){ width:5px;height:5px;left:45%;background:rgba(168,214,110,.15);animation-duration:20s;animation-delay:2s; }
+
+  @keyframes ptclFloat {
+    0%   { transform: translateY(110vh); opacity:0; }
+    8%   { opacity:1; }
+    92%  { opacity:.6; }
+    100% { transform: translateY(-10vh); opacity:0; }
+  }
+
+  /* ── Animaciones globales ── */
+  @keyframes slideRight {
+    from { opacity:0; transform:translateX(-24px); }
+    to   { opacity:1; transform:translateX(0); }
+  }
+  @keyframes popIn {
+    from { opacity:0; transform:scale(.75) translateY(8px); }
+    to   { opacity:1; transform:scale(1) translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateX(-50%) translateY(12px); }
+    to   { opacity:1; transform:translateX(-50%) translateY(0); }
+  }
+
+  /* ════════════════════════════════
+     RESPONSIVE
+  ════════════════════════════════ */
   @media(max-width:900px) {
-    .hero { grid-template-columns: 1fr; }
-    .hero-right { min-height: 300px; }
-    .hero-left { padding: 40px 5%; }
+    .hero {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 55vw;
+      min-height: auto;
+    }
+    .hero-left {
+      order: 2;
+      padding: 40px 6% 50px;
+      background: #060f04;
+    }
+    .hero-left::before { display: none; }
+    .hero-right {
+      order: 1;
+      height: 55vw;
+      min-height: 260px;
+    }
+    .hero-img-fade {
+      background: linear-gradient(to bottom,
+        transparent 60%,
+        rgba(6,15,4,.8) 85%,
+        #060f04 100%
+      );
+    }
+    .hero-img-fade-bottom { display: none; }
+    .float-badge { display: none; }
+    .hero-stats {
+      width: 100%;
+      justify-content: space-between;
+    }
+    .hero-stat { padding: 12px 14px; flex: 1; }
+    .hero-stat-num { font-size: 18px; }
+    .hero-scroll-hint { display: none; }
+  }
+
+  @media(max-width:480px) {
+    .hero-right { height: 65vw; }
+    .hero-h1 .line1 { font-size: 28px; }
+    .hero-h1 .line2 { font-size: 40px; }
+    .hero-h1 .line3 { font-size: 28px; }
+    .hero-btns { flex-direction: column; }
+    .hero-btn-wsp, .hero-btn-ghost { width: 100%; justify-content: center; }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .hero-stat { border-right: none; border-bottom: 1px solid rgba(168,214,110,.1); }
+    .hero-stat:nth-child(odd) { border-right: 1px solid rgba(168,214,110,.1); }
+    .hero-stat:nth-last-child(-n+2) { border-bottom: none; }
   }
 </style>
 
-<!-- SECCIÓN HERO / PORTADA -->
+<!-- ══════════════════ HERO ══════════════════ -->
 <section class="hero" id="inicio">
 
-  <!-- Columna izquierda: texto -->
+  <!-- Partículas -->
+  <div class="hero-particles">
+    <div class="ptcl"></div>
+    <div class="ptcl"></div>
+    <div class="ptcl"></div>
+    <div class="ptcl"></div>
+    <div class="ptcl"></div>
+  </div>
+
+  <!-- ── IZQUIERDA: Texto ── -->
   <div class="hero-left">
-    <div class="hero-tag">
-      <i class="fas fa-certificate"></i> Certificado SAG
+
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-pill">
+        <i class="fas fa-certificate"></i> Certificado SAG
+      </div>
+      <div class="hero-eyebrow-dot"></div>
+      <div class="hero-eyebrow-line"></div>
     </div>
+
     <h1 class="hero-h1">
-      Más que tierra,<br>
-      <span class="green">es vida</span> para<br>
-      tus <span class="orange">plantas</span>
+      <span class="line1">Más que tierra,</span>
+      <span class="line2">es vida</span>
+      <span class="line3">para tus plantas</span>
     </h1>
+
+    <div class="hero-sep">
+      <div class="hero-sep-line"></div>
+      <span class="hero-sep-text">Sustrato orgánico · Compost · Perlita · Turba</span>
+    </div>
+
     <p class="hero-sub">
-      Sustrato orgánico 100% natural con compost, perlita y turba.
-      Certificado SAG. Despacho a domicilio en todo Chile.
+      Certificado SAG. 100% natural. Despacho a domicilio
+      en Chillán, Concepción y toda la región.
     </p>
+
     <div class="hero-btns">
-      <a href="https://wa.me/56956595642?text=Hola!%20Quiero%20hacer%20un%20pedido" class="btn-main">
-        <i class="fab fa-whatsapp"></i> Hacer pedido
+      <a href="https://wa.me/56956595642?text=Hola!%20Quiero%20hacer%20un%20pedido"
+         class="hero-btn-wsp">
+        <i class="fab fa-whatsapp" style="font-size:17px"></i>
+        Hacer pedido
       </a>
-      <a href="#producto" class="btn-outline">
-        <i class="fas fa-leaf"></i> Ver producto
+      <a href="#producto" class="hero-btn-ghost">
+        <i class="fas fa-leaf"></i>
+        Ver productos
       </a>
     </div>
-    <div class="hero-badges">
-      <div class="hero-badge-item"><i class="fas fa-check-circle"></i> Despacho a domicilio</div>
-      <div class="hero-badge-item"><i class="fas fa-check-circle"></i> 10 años de experiencia</div>
-      <div class="hero-badge-item"><i class="fas fa-check-circle"></i> 3.500+ seguidores</div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">10<span>+</span></div>
+        <div class="hero-stat-label">Años exp.</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">3.5<span>k</span></div>
+        <div class="hero-stat-label">Clientes</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">8<span>+</span></div>
+        <div class="hero-stat-label">Ciudades</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">SAG</div>
+        <div class="hero-stat-label">Certificado</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── DERECHA: Imagen ── -->
+  <div class="hero-right">
+    <div class="hero-img-wrap">
+      <img
+        src="https://raw.githubusercontent.com/digitalmenteepro-cell/tierrasdehojasvalle/refs/heads/main/portada%203.png"
+        alt="Tierra de Hojas Valle — Sustrato Premium"
+      />
+    </div>
+    <div class="hero-img-fade"></div>
+    <div class="hero-img-fade-bottom"></div>
+
+    <!-- Badges flotantes (solo desktop) -->
+    <div class="float-badge fb-sag">
+      <div class="float-badge-icon" style="background:rgba(61,122,46,.1)">
+        <i class="fas fa-certificate" style="color:#3d7a2e"></i>
+      </div>
+      <div class="float-badge-body">
+        <div class="float-badge-title">Cert. SAG</div>
+        <div class="float-badge-sub">Oficial Chile</div>
+      </div>
+    </div>
+
+    <div class="float-badge fb-org">
+      <div class="float-badge-icon" style="background:rgba(168,214,110,.12)">
+        <i class="fas fa-seedling" style="color:#3d7a2e"></i>
+      </div>
+      <div class="float-badge-body">
+        <div class="float-badge-title">100% Orgánico</div>
+        <div class="float-badge-sub">Sin químicos dañinos</div>
+      </div>
+    </div>
+
+    <div class="float-badge fb-truck">
+      <div class="float-badge-icon" style="background:rgba(37,211,102,.1)">
+        <i class="fas fa-truck" style="color:#1a9e4a"></i>
+      </div>
+      <div class="float-badge-body">
+        <div class="float-badge-title">Despacho</div>
+        <div class="float-badge-sub">A domicilio</div>
+      </div>
     </div>
   </div>
 
-  <!-- Columna derecha: imagen con etiquetas flotantes -->
-  <div class="hero-right">
-    <img
-      src="https://raw.githubusercontent.com/digitalmenteepro-cell/tierradehojasvalle/main/img/IMG_7286.jpg"
-      alt="Sustrato Carpediem - Tierra de Hojas Valle"
-      class="hero-img"
-    />
-    <div class="hero-overlay"></div>
-
-    <!-- Etiqueta: Compost orgánico -->
-    <div class="hero-tag-float" style="top:14%;left:4%;border:2px solid #3d7a2e;color:#2a5a1e;">
-      <i class="fas fa-seedling" style="color:#3d7a2e;margin-right:5px"></i>Compost orgánico
+  <!-- Scroll hint (desktop) -->
+  <div class="hero-scroll-hint">
+    <div class="scroll-mouse">
+      <div class="scroll-wheel"></div>
     </div>
-
-    <!-- Etiqueta: Perlita premium -->
-    <div class="hero-tag-float" style="top:38%;right:3%;border:2px solid #e8650a;color:#b84e00;">
-      <i class="fas fa-circle" style="color:#e8650a;margin-right:5px;font-size:9px"></i>Perlita premium
-    </div>
-
-    <!-- Etiqueta: Turba natural -->
-    <div class="hero-tag-float" style="bottom:22%;left:4%;border:2px solid #3d7a2e;color:#2a5a1e;">
-      <i class="fas fa-layer-group" style="color:#3d7a2e;margin-right:5px"></i>Turba natural
-    </div>
-
-    <!-- Etiqueta: Certificado SAG -->
-    <div style="position:absolute;bottom:6%;right:4%;background:#3d7a2e;border-radius:10px;padding:9px 14px;font-size:11px;font-weight:700;color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.2);">
-      <i class="fas fa-shield-alt" style="margin-right:5px"></i>Cert. SAG ✓
-    </div>
+    <span class="scroll-label">Scroll</span>
   </div>
 
 </section>
