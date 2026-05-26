@@ -1,0 +1,112 @@
+<!-- ============================================================
+     SECCIÓN 1: NAVEGACIÓN (nav.html)
+     Copia todo este bloque y pégalo al inicio de tu <body>
+     ============================================================ -->
+
+<!-- Estilos de la navegación -->
+<style>
+  /* Fuentes */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+  @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+
+  /* Variables globales - Agrega esto en el <head> de tu index.html si no lo tienes */
+  :root {
+    --green: #3d7a2e;
+    --green-dark: #2a5a1e;
+    --green-light: #5a9e47;
+    --orange: #e8650a;
+    --orange-light: #f07820;
+    --yellow: #c8940a;
+    --white: #ffffff;
+    --gray: #f5f5f3;
+    --text: #1a1a1a;
+    --text2: #555;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(255,255,255,.97);
+    border-bottom: 1px solid rgba(61,122,46,.15);
+    padding: 12px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo img { height: 46px; object-fit: contain; }
+  .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+  .nav-links a { color: #333; text-decoration: none; font-size: 13px; font-weight: 500; transition: color .3s; }
+  .nav-links a:hover { color: var(--green); }
+  .nav-cta {
+    background: var(--green); color: #fff !important;
+    padding: 10px 20px; border-radius: 50px;
+    font-size: 13px !important; font-weight: 600 !important;
+    display: flex; align-items: center; gap: 7px;
+  }
+  .nav-cta:hover { background: var(--green-light) !important; }
+  .nav-ham { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .nav-ham span { display: block; width: 24px; height: 2px; background: #333; border-radius: 2px; transition: all .3s; }
+  .mob-menu {
+    display: none; position: fixed; inset: 0;
+    background: rgba(255,255,255,.99); z-index: 999;
+    flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+  }
+  .mob-menu.open { display: flex; }
+  .mob-menu a { color: #111; text-decoration: none; font-size: 20px; font-weight: 600; }
+  .mob-menu a:hover { color: var(--green); }
+
+  @media(max-width:768px) {
+    .nav-links { display: none; }
+    .nav-ham { display: flex; }
+  }
+</style>
+
+<!-- Link a Font Awesome (agregar en <head> si no está) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- NAVEGACIÓN -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <img src="https://raw.githubusercontent.com/digitalmenteepro-cell/tierradehojasvalle/main/img/IMG_7292%202.jpg" alt="Tierra de Hojas Valle" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="#producto">Producto</a></li>
+    <li><a href="#oferta">Oferta</a></li>
+    <li><a href="#beneficios">Beneficios</a></li>
+    <li>
+      <a href="https://wa.me/56956595642?text=Hola!%20Quiero%20pedir%20sustrato" class="nav-cta">
+        <i class="fab fa-whatsapp"></i> Pedir ahora
+      </a>
+    </li>
+  </ul>
+  <div class="nav-ham" onclick="document.getElementById('mob').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MENÚ MÓVIL -->
+<div class="mob-menu" id="mob">
+  <a href="#producto" onclick="document.getElementById('mob').classList.remove('open')">Producto</a>
+  <a href="#oferta" onclick="document.getElementById('mob').classList.remove('open')">Oferta</a>
+  <a href="#beneficios" onclick="document.getElementById('mob').classList.remove('open')">Beneficios</a>
+  <a href="https://wa.me/56956595642?text=Hola!%20Quiero%20pedir%20sustrato"
+     onclick="document.getElementById('mob').classList.remove('open')"
+     style="color:#25D366">
+    <i class="fab fa-whatsapp"></i> Pedir ahora
+  </a>
+</div>
+
+<!-- Script para sombra de nav al hacer scroll -->
+<script>
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').style.boxShadow =
+      window.scrollY > 60 ? '0 4px 20px rgba(0,0,0,.1)' : '0 2px 12px rgba(0,0,0,.06)';
+  });
+</script>
