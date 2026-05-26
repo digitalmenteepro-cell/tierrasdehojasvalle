@@ -1,0 +1,147 @@
+<!-- ============================================================
+     SECCIÓN 4: PRODUCTO (producto.html)
+     Sección con imagen del producto, descripción e ingredientes
+     Pégalo después de las promociones en tu página
+     ============================================================ -->
+
+<style>
+  .product-section {
+    background: #fff;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    padding: 80px 5%;
+  }
+  .product-img-wrap { position: relative; }
+  .product-img {
+    width: 100%; border-radius: 20px;
+    display: block; box-shadow: 0 8px 40px rgba(0,0,0,.1);
+  }
+  .product-label {
+    position: absolute;
+    background: var(--orange, #e8650a); color: #fff;
+    font-size: 11px; font-weight: 700;
+    padding: 6px 14px; border-radius: 20px;
+    top: 20px; left: 20px; letter-spacing: .3px;
+  }
+  .product-sag {
+    position: absolute;
+    background: #fff; border: 2px solid var(--green, #3d7a2e);
+    color: var(--green-dark, #2a5a1e);
+    font-size: 11px; font-weight: 700;
+    padding: 6px 14px; border-radius: 20px;
+    top: 20px; right: 20px;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .product-content { display: flex; flex-direction: column; gap: 18px; }
+  .product-content h2 {
+    font-size: clamp(24px, 3.5vw, 38px);
+    font-weight: 800; color: #111; line-height: 1.2;
+  }
+  .product-content h2 span { color: var(--green, #3d7a2e); }
+  .product-content p { font-size: 15px; color: #555; line-height: 1.7; }
+
+  /* Tag de sección */
+  .sec-tag {
+    display: inline-block;
+    background: rgba(61,122,46,.08); border: 1px solid rgba(61,122,46,.2);
+    color: var(--green, #3d7a2e);
+    padding: 6px 16px; border-radius: 50px;
+    font-size: 11px; font-weight: 700; letter-spacing: .8px;
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+
+  /* Grid de ingredientes */
+  .ingredient-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px; margin-top: 8px;
+  }
+  .ingredient-card {
+    background: var(--gray, #f5f5f3);
+    border-radius: 12px; padding: 14px;
+    display: flex; align-items: flex-start; gap: 10px;
+    border: 1px solid #ebebeb;
+  }
+  .ingredient-icon {
+    width: 36px; height: 36px;
+    background: var(--green, #3d7a2e);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .ingredient-icon i { color: #fff; font-size: 15px; }
+  .ingredient-card h4 { font-size: 13px; font-weight: 700; color: #111; margin-bottom: 2px; }
+  .ingredient-card p  { font-size: 11px; color: #777; line-height: 1.4; }
+
+  @media(max-width:900px) {
+    .product-section { grid-template-columns: 1fr; gap: 30px; }
+    .ingredient-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<!-- SECCIÓN PRODUCTO -->
+<section class="product-section" id="producto">
+
+  <!-- Imagen del producto -->
+  <div class="product-img-wrap reveal">
+    <img
+      src="https://raw.githubusercontent.com/digitalmenteepro-cell/tierradehojasvalle/main/img/IMG_7287.jpg"
+      alt="Sustrato Carpediem con ingredientes"
+      class="product-img"
+    />
+    <div class="product-label">Sustrato Carpediem</div>
+    <div class="product-sag"><i class="fas fa-certificate"></i> SAG</div>
+  </div>
+
+  <!-- Contenido del producto -->
+  <div class="product-content reveal">
+    <div class="sec-tag">Nuestro producto</div>
+    <h2>
+      Sustrato hecho a partir de<br>
+      <span>materia orgánica pura</span>
+    </h2>
+    <p>
+      Rico en energía, fósforo y nitrógeno. Libre de contaminantes. 10 años de experiencia
+      respaldando el crecimiento de plantas sanas en huertas y jardines de todo Chile.
+    </p>
+
+    <!-- Tarjetas de ingredientes -->
+    <div class="ingredient-grid">
+      <div class="ingredient-card">
+        <div class="ingredient-icon"><i class="fas fa-recycle"></i></div>
+        <div>
+          <h4>Compost</h4>
+          <p>Materia orgánica descompuesta que nutre la raíz</p>
+        </div>
+      </div>
+      <div class="ingredient-card">
+        <div class="ingredient-icon"><i class="fas fa-circle" style="font-size:11px"></i></div>
+        <div>
+          <h4>Perlita</h4>
+          <p>Mejora el drenaje y aireación del suelo</p>
+        </div>
+      </div>
+      <div class="ingredient-card">
+        <div class="ingredient-icon"><i class="fas fa-layer-group"></i></div>
+        <div>
+          <h4>Turba</h4>
+          <p>Retiene humedad y aporta nutrientes clave</p>
+        </div>
+      </div>
+      <div class="ingredient-card">
+        <div class="ingredient-icon"><i class="fas fa-seedling"></i></div>
+        <div>
+          <h4>Sustrato maduro</h4>
+          <p>Bosques forestales certificados SAG</p>
+        </div>
+      </div>
+    </div>
+
+    <a href="https://wa.me/56956595642?text=Hola!%20Quiero%20m%C3%A1s%20info%20del%20sustrato"
+       class="btn-main" style="width:fit-content;margin-top:8px;">
+      <i class="fab fa-whatsapp"></i> Consultar precio
+    </a>
+  </div>
+
+</section>
