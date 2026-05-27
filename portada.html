@@ -1,11 +1,10 @@
 <!-- ============================================================
-     PORTADA / HERO — Versión corregida
+     PORTADA / HERO — Letras más visibles en móvil
      ============================================================ -->
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-  /* ── BASE ── */
   .hero {
     position: relative;
     width: 100%;
@@ -13,10 +12,10 @@
     overflow: hidden;
     display: flex;
     align-items: flex-end;
-    background: #1a3a10;
+    background: #0a1806;
   }
 
-  /* ── IMAGEN FONDO FULL ── */
+  /* ── IMAGEN FONDO ── */
   .hero-bg-img {
     position: absolute;
     inset: 0;
@@ -29,33 +28,29 @@
     transform: scale(1.06);
     animation: zoomOut 2s cubic-bezier(.16,1,.3,1) forwards;
   }
-  @keyframes zoomOut {
-    to { transform: scale(1); }
-  }
+  @keyframes zoomOut { to { transform: scale(1); } }
 
-  /* ── OVERLAYS ── */
-  /* Oscurece solo la parte inferior para que el texto se lea */
+  /* ── OVERLAY DESKTOP ── */
   .hero-overlay {
     position: absolute;
     inset: 0;
     z-index: 2;
     background: linear-gradient(
       to top,
-      rgba(10,25,6,.92) 0%,
-      rgba(10,25,6,.70) 30%,
-      rgba(10,25,6,.25) 60%,
-      rgba(10,25,6,.05) 100%
+      rgba(6,16,3,.95) 0%,
+      rgba(6,16,3,.75) 35%,
+      rgba(6,16,3,.30) 65%,
+      rgba(6,16,3,.08) 100%
     );
   }
-  /* Gradiente lateral izquierdo — solo en desktop */
   .hero-overlay-left {
     position: absolute;
     inset: 0;
     z-index: 2;
     background: linear-gradient(
       to right,
-      rgba(10,25,6,.75) 0%,
-      rgba(10,25,6,.30) 45%,
+      rgba(6,16,3,.80) 0%,
+      rgba(6,16,3,.35) 45%,
       transparent 70%
     );
   }
@@ -71,14 +66,14 @@
     max-width: 680px;
   }
 
-  /* Pill SAG */
+  /* Pill */
   .hero-pill {
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    background: rgba(168,214,110,.15);
-    border: 1px solid rgba(168,214,110,.35);
-    color: #b8e07a;
+    background: rgba(168,214,110,.18);
+    border: 1px solid rgba(168,214,110,.4);
+    color: #c8f080;
     padding: 6px 16px;
     border-radius: 50px;
     font-family: 'Poppins', sans-serif;
@@ -103,10 +98,11 @@
   .hero-h1 .l1 {
     display: block;
     font-size: clamp(28px, 4vw, 52px);
-    color: rgba(255,255,255,.75);
+    color: rgba(255,255,255,.88);
     font-weight: 700;
     font-style: italic;
     line-height: 1.1;
+    text-shadow: 0 2px 20px rgba(0,0,0,.6);
   }
   .hero-h1 .l2 {
     display: block;
@@ -114,31 +110,35 @@
     color: #fff;
     font-weight: 900;
     line-height: .95;
+    text-shadow: 0 3px 24px rgba(0,0,0,.7);
   }
   .hero-h1 .l2 em {
     font-style: italic;
     color: #a8d66e;
+    text-shadow: 0 2px 16px rgba(0,0,0,.5);
   }
   .hero-h1 .l3 {
     display: block;
     font-size: clamp(26px, 3.5vw, 46px);
-    color: rgba(255,255,255,.55);
+    color: rgba(255,255,255,.80);
     font-weight: 700;
     font-style: italic;
     line-height: 1.2;
     margin-top: 4px;
+    text-shadow: 0 2px 20px rgba(0,0,0,.6);
   }
 
   /* Subtítulo */
   .hero-sub {
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
-    color: rgba(255,255,255,.6);
+    color: rgba(255,255,255,.80);
     line-height: 1.75;
     margin-bottom: 32px;
     max-width: 420px;
     opacity: 0;
     animation: fadeSlide .7s ease .5s forwards;
+    text-shadow: 0 1px 12px rgba(0,0,0,.5);
   }
 
   /* Botones */
@@ -162,53 +162,52 @@
     font-size: 15px;
     font-weight: 700;
     text-decoration: none;
-    box-shadow: 0 8px 28px rgba(37,211,102,.4);
+    box-shadow: 0 8px 28px rgba(37,211,102,.45);
     transition: all .3s;
   }
   .btn-wsp-hero:hover {
     background: #1faa55;
     transform: translateY(-3px);
-    box-shadow: 0 14px 38px rgba(37,211,102,.5);
+    box-shadow: 0 14px 38px rgba(37,211,102,.55);
   }
   .btn-ghost-hero {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(255,255,255,.1);
-    color: rgba(255,255,255,.85);
+    background: rgba(255,255,255,.15);
+    color: #fff;
     padding: 15px 26px;
     border-radius: 50px;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
     font-weight: 600;
     text-decoration: none;
-    border: 1px solid rgba(255,255,255,.2);
+    border: 1px solid rgba(255,255,255,.35);
     backdrop-filter: blur(8px);
     transition: all .3s;
   }
   .btn-ghost-hero:hover {
-    background: rgba(255,255,255,.18);
-    border-color: rgba(255,255,255,.4);
-    color: #fff;
+    background: rgba(255,255,255,.25);
+    border-color: rgba(255,255,255,.5);
     transform: translateY(-2px);
   }
 
-  /* Stats row */
+  /* Stats */
   .hero-stats {
     display: flex;
     gap: 0;
     width: fit-content;
-    border: 1px solid rgba(168,214,110,.18);
+    border: 1px solid rgba(168,214,110,.22);
     border-radius: 14px;
     overflow: hidden;
-    background: rgba(0,0,0,.35);
-    backdrop-filter: blur(12px);
+    background: rgba(0,0,0,.5);
+    backdrop-filter: blur(14px);
     opacity: 0;
     animation: fadeSlide .7s ease .8s forwards;
   }
   .h-stat {
     padding: 13px 20px;
-    border-right: 1px solid rgba(168,214,110,.12);
+    border-right: 1px solid rgba(168,214,110,.15);
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -221,30 +220,30 @@
     color: #fff;
     line-height: 1;
   }
-  .h-stat-n b { color: #a8d66e; font-style: normal; }
+  .h-stat-n b { color: #a8d66e; }
   .h-stat-l {
     font-family: 'Poppins', sans-serif;
     font-size: 9px;
     font-weight: 600;
-    color: rgba(255,255,255,.38);
+    color: rgba(255,255,255,.5);
     text-transform: uppercase;
     letter-spacing: .7px;
     white-space: nowrap;
   }
 
-  /* Badges flotantes — desktop */
+  /* Badges flotantes desktop */
   .f-badge {
     position: absolute;
     z-index: 15;
-    background: rgba(255,255,255,.95);
+    background: rgba(255,255,255,.96);
     backdrop-filter: blur(14px);
     border-radius: 14px;
     padding: 10px 15px;
     display: flex;
     align-items: center;
     gap: 10px;
-    box-shadow: 0 8px 28px rgba(0,0,0,.18);
-    border: 1px solid rgba(255,255,255,.6);
+    box-shadow: 0 8px 28px rgba(0,0,0,.2);
+    border: 1px solid rgba(255,255,255,.7);
     opacity: 0;
     animation: popBadge .5s cubic-bezier(.34,1.56,.64,1) forwards;
   }
@@ -254,34 +253,20 @@
     display: flex; align-items: center; justify-content: center;
     font-size: 14px; flex-shrink: 0;
   }
-  .f-badge-t {
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px; font-weight: 700; color: #111;
-    line-height: 1.2;
-  }
-  .f-badge-s {
-    font-family: 'Poppins', sans-serif;
-    font-size: 10px; color: #888;
-  }
+  .f-badge-t { font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 700; color: #111; line-height: 1.2; }
+  .f-badge-s { font-family: 'Poppins', sans-serif; font-size: 10px; color: #888; }
   .fb1 { top: 16%; right: 5%; animation-delay: 1.0s; }
   .fb2 { top: 44%; right: 5%; animation-delay: 1.25s; }
   .fb3 { bottom: 18%; right: 5%; animation-delay: 1.5s; }
 
   /* Partículas */
-  .hero-ptcl {
-    position: absolute; inset: 0; z-index: 3;
-    pointer-events: none; overflow: hidden;
-  }
-  .p {
-    position: absolute; border-radius: 50%;
-    animation: ptUp linear infinite;
-  }
+  .hero-ptcl { position: absolute; inset: 0; z-index: 3; pointer-events: none; overflow: hidden; }
+  .p { position: absolute; border-radius: 50%; animation: ptUp linear infinite; }
   .p:nth-child(1){width:3px;height:3px;left:12%;background:rgba(168,214,110,.4);animation-duration:13s;animation-delay:0s}
   .p:nth-child(2){width:4px;height:4px;left:28%;background:rgba(168,214,110,.25);animation-duration:17s;animation-delay:2s}
   .p:nth-child(3){width:2px;height:2px;left:50%;background:rgba(168,214,110,.35);animation-duration:11s;animation-delay:4s}
   .p:nth-child(4){width:3px;height:3px;left:72%;background:rgba(168,214,110,.2);animation-duration:15s;animation-delay:1s}
   .p:nth-child(5){width:5px;height:5px;left:88%;background:rgba(168,214,110,.15);animation-duration:19s;animation-delay:3s}
-
   @keyframes ptUp {
     0%  { transform:translateY(110vh);opacity:0 }
     8%  { opacity:1 }
@@ -291,31 +276,21 @@
 
   /* Scroll indicator */
   .hero-scroll {
-    position: absolute;
-    bottom: 28px; right: 6%;
-    z-index: 20;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    opacity: 0;
+    position: absolute; bottom: 28px; right: 6%;
+    z-index: 20; display: flex; flex-direction: column;
+    align-items: center; gap: 8px; opacity: 0;
     animation: fadeIn .6s ease 1.8s forwards;
   }
   .scroll-bar {
     width: 2px; height: 50px;
-    background: rgba(255,255,255,.12);
-    border-radius: 2px;
-    overflow: hidden;
-    position: relative;
+    background: rgba(255,255,255,.15); border-radius: 2px;
+    overflow: hidden; position: relative;
   }
   .scroll-bar::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
+    content: ''; position: absolute; top: 0; left: 0;
     width: 100%; height: 40%;
     background: linear-gradient(to bottom, #a8d66e, transparent);
-    border-radius: 2px;
-    animation: scrollBar 2s ease-in-out infinite;
+    border-radius: 2px; animation: scrollBar 2s ease-in-out infinite;
   }
   @keyframes scrollBar {
     0%  { transform: translateY(-100%); }
@@ -325,8 +300,7 @@
     font-family: 'Poppins', sans-serif;
     font-size: 9px; font-weight: 600;
     letter-spacing: 2px; text-transform: uppercase;
-    color: rgba(255,255,255,.3);
-    writing-mode: vertical-rl;
+    color: rgba(255,255,255,.35); writing-mode: vertical-rl;
   }
 
   /* Animaciones */
@@ -338,13 +312,9 @@
     from { opacity:0; transform:scale(.75) translateX(12px); }
     to   { opacity:1; transform:scale(1) translateX(0); }
   }
-  @keyframes fadeIn {
-    to { opacity:1; }
-  }
+  @keyframes fadeIn { to { opacity:1; } }
 
-  /* ════ RESPONSIVE ════ */
-
-  /* Tablet */
+  /* ════ TABLET ════ */
   @media(max-width:900px) {
     .f-badge { display: none; }
     .hero-scroll { display: none; }
@@ -354,56 +324,93 @@
     .h-stat { flex: 1; padding: 12px 10px; }
   }
 
-  /* Móvil */
+  /* ════ MÓVIL ════ */
   @media(max-width:540px) {
     .hero { min-height: 100svh; align-items: flex-end; }
+
+    /* Overlay más oscuro en móvil para que las letras se lean bien */
     .hero-overlay {
       background: linear-gradient(
         to top,
-        rgba(10,25,6,.96) 0%,
-        rgba(10,25,6,.82) 35%,
-        rgba(10,25,6,.30) 65%,
-        rgba(10,25,6,.0) 100%
+        rgba(4,12,2,.98) 0%,
+        rgba(4,12,2,.92) 35%,
+        rgba(4,12,2,.60) 60%,
+        rgba(4,12,2,.20) 80%,
+        rgba(4,12,2,.05) 100%
       );
     }
+
+    /* Capa extra oscura solo en móvil para mayor contraste */
+    .hero-overlay-mobile {
+      display: block;
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: rgba(4,12,2,.25);
+    }
+
     .hero-content { padding: 0 5% 48px; }
-    .hero-h1 .l1 { font-size: 22px; }
-    .hero-h1 .l2 { font-size: 44px; }
-    .hero-h1 .l3 { font-size: 20px; }
-    .hero-sub { font-size: 13px; }
+
+    /* Fuentes más grandes y con sombra fuerte */
+    .hero-h1 .l1 {
+      font-size: 24px;
+      color: #fff;
+      text-shadow: 0 2px 16px rgba(0,0,0,.9), 0 0 40px rgba(0,0,0,.8);
+    }
+    .hero-h1 .l2 {
+      font-size: 48px;
+      text-shadow: 0 3px 20px rgba(0,0,0,.9), 0 0 50px rgba(0,0,0,.8);
+    }
+    .hero-h1 .l3 {
+      font-size: 22px;
+      color: rgba(255,255,255,.95);
+      text-shadow: 0 2px 16px rgba(0,0,0,.9);
+    }
+    .hero-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,.92);
+      text-shadow: 0 1px 14px rgba(0,0,0,.8);
+    }
+    .hero-pill {
+      background: rgba(168,214,110,.25);
+      border-color: rgba(168,214,110,.5);
+      color: #d4f09a;
+    }
     .hero-btns { flex-direction: column; gap: 10px; }
     .btn-wsp-hero,
     .btn-ghost-hero { width: 100%; justify-content: center; }
+
     .hero-stats {
       display: grid;
       grid-template-columns: 1fr 1fr;
       width: 100%;
+      background: rgba(0,0,0,.65);
     }
     .h-stat {
       border-right: none !important;
-      border-bottom: 1px solid rgba(168,214,110,.12);
+      border-bottom: 1px solid rgba(168,214,110,.15);
     }
-    .h-stat:nth-child(odd)  { border-right: 1px solid rgba(168,214,110,.12) !important; }
+    .h-stat:nth-child(odd)  { border-right: 1px solid rgba(168,214,110,.15) !important; }
     .h-stat:nth-last-child(-n+2) { border-bottom: none; }
-    .h-stat-n { font-size: 17px; }
+    .h-stat-n { font-size: 18px; }
+    .h-stat-l { color: rgba(255,255,255,.65); }
   }
 </style>
 
 <!-- ══════════ HERO ══════════ -->
 <section class="hero" id="inicio">
 
-  <!-- Imagen de fondo -->
   <img
     class="hero-bg-img"
     src="https://raw.githubusercontent.com/digitalmenteepro-cell/tierrasdehojasvalle/refs/heads/main/portada%203.png"
     alt="Tierra de Hojas Valle — Sustrato Premium"
   />
 
-  <!-- Capas de overlay -->
   <div class="hero-overlay"></div>
   <div class="hero-overlay-left"></div>
+  <!-- Capa extra solo visible en móvil -->
+  <div class="hero-overlay-mobile" style="display:none"></div>
 
-  <!-- Partículas -->
   <div class="hero-ptcl">
     <div class="p"></div><div class="p"></div><div class="p"></div>
     <div class="p"></div><div class="p"></div>
@@ -414,39 +421,26 @@
     <div class="f-badge-icon" style="background:rgba(61,122,46,.1)">
       <i class="fas fa-certificate" style="color:#3d7a2e"></i>
     </div>
-    <div>
-      <div class="f-badge-t">Cert. SAG</div>
-      <div class="f-badge-s">Oficial Chile</div>
-    </div>
+    <div><div class="f-badge-t">Cert. SAG</div><div class="f-badge-s">Oficial Chile</div></div>
   </div>
-
   <div class="f-badge fb2">
     <div class="f-badge-icon" style="background:rgba(168,214,110,.12)">
       <i class="fas fa-seedling" style="color:#3d7a2e"></i>
     </div>
-    <div>
-      <div class="f-badge-t">100% Orgánico</div>
-      <div class="f-badge-s">Sin químicos</div>
-    </div>
+    <div><div class="f-badge-t">100% Orgánico</div><div class="f-badge-s">Sin químicos</div></div>
   </div>
-
   <div class="f-badge fb3">
     <div class="f-badge-icon" style="background:rgba(37,211,102,.1)">
       <i class="fas fa-truck" style="color:#1a9e4a"></i>
     </div>
-    <div>
-      <div class="f-badge-t">Despacho</div>
-      <div class="f-badge-s">A domicilio</div>
-    </div>
+    <div><div class="f-badge-t">Despacho</div><div class="f-badge-s">A domicilio</div></div>
   </div>
 
-  <!-- Scroll indicator (desktop) -->
   <div class="hero-scroll">
     <div class="scroll-bar"></div>
     <span class="scroll-lbl">Scroll</span>
   </div>
 
-  <!-- Contenido principal -->
   <div class="hero-content">
 
     <div class="hero-pill">
@@ -465,14 +459,11 @@
     </p>
 
     <div class="hero-btns">
-      <a href="https://wa.me/56956595642?text=Hola!%20Quiero%20hacer%20un%20pedido"
-         class="btn-wsp-hero">
-        <i class="fab fa-whatsapp" style="font-size:17px"></i>
-        Hacer pedido
+      <a href="https://wa.me/56956595642?text=Hola!%20Quiero%20hacer%20un%20pedido" class="btn-wsp-hero">
+        <i class="fab fa-whatsapp" style="font-size:17px"></i> Hacer pedido
       </a>
       <a href="#producto" class="btn-ghost-hero">
-        <i class="fas fa-leaf"></i>
-        Ver productos
+        <i class="fas fa-leaf"></i> Ver productos
       </a>
     </div>
 
@@ -497,3 +488,11 @@
 
   </div>
 </section>
+
+<script>
+  // Activar capa extra oscura solo en móvil
+  if(window.innerWidth <= 540) {
+    const m = document.querySelector('.hero-overlay-mobile');
+    if(m) m.style.display = 'block';
+  }
+</script>
