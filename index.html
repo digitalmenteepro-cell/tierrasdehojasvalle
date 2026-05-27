@@ -24,11 +24,11 @@
   <div id="mod-producto"></div>
   <div id="mod-banner-familia"></div>
   <div id="mod-galeria"></div>
+  <div id="mod-reels"></div>
   <div id="mod-testimonios"></div>
   <div id="mod-contacto"></div>
 
   <script>
-    // Base URL automática — funciona en GitHub Pages y en local
     const BASE = window.location.pathname.replace(/\/[^\/]*$/, '/');
 
     const MODULES = [
@@ -38,17 +38,16 @@
       { id: 'mod-producto',       file: 'producto.html'      },
       { id: 'mod-banner-familia', file: 'banner-familia.html'},
       { id: 'mod-galeria',        file: 'galeria.html'       },
+      { id: 'mod-reels',          file: 'reels.html'         },
       { id: 'mod-testimonios',    file: 'testimonios.html'   },
       { id: 'mod-contacto',       file: 'contacto.html'      },
     ];
 
-    // Spinner en cada contenedor mientras carga
     MODULES.forEach(m => {
       const el = document.getElementById(m.id);
       if (el) el.classList.add('module-loading');
     });
 
-    // Carga un módulo e inyecta su HTML
     async function loadModule({ id, file }) {
       const container = document.getElementById(id);
       if (!container) return;
@@ -59,7 +58,6 @@
         const html = await res.text();
         container.classList.remove('module-loading');
         container.innerHTML = html;
-        // Re-ejecutar scripts dentro del módulo
         container.querySelectorAll('script').forEach(old => {
           const s = document.createElement('script');
           [...old.attributes].forEach(a => s.setAttribute(a.name, a.value));
@@ -73,10 +71,8 @@
       }
     }
 
-    // Cargar todos en paralelo, luego activar animaciones
     Promise.all(MODULES.map(loadModule)).then(() => {
 
-      // Animaciones reveal al hacer scroll
       const obs = new IntersectionObserver(entries => {
         entries.forEach(e => {
           if (e.isIntersecting) {
@@ -87,7 +83,6 @@
       }, { threshold: .12, rootMargin: '0px 0px -30px 0px' });
       document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
 
-      // Sombra nav al hacer scroll
       window.addEventListener('scroll', () => {
         const nav = document.querySelector('nav');
         if (nav) nav.style.boxShadow =
