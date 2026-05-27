@@ -30,6 +30,10 @@
   }
   @keyframes zoomOut { to { transform: scale(1); } }
 
+  /* Imagen desktop visible, móvil oculta */
+  .hero-bg-mobile { display: none; }
+  .hero-bg-desktop { display: block; }
+
   /* ── OVERLAY DESKTOP ── */
   .hero-overlay {
     position: absolute;
@@ -326,6 +330,8 @@
 
   /* ════ MÓVIL ════ */
   @media(max-width:540px) {
+    .hero-bg-desktop { display: none; }
+    .hero-bg-mobile  { display: block; object-position: center top; }
     .hero { min-height: 100svh; align-items: flex-end; }
 
     /* Overlay más oscuro en móvil para que las letras se lean bien */
@@ -400,9 +406,16 @@
 <!-- ══════════ HERO ══════════ -->
 <section class="hero" id="inicio">
 
+  <!-- Imagen desktop (oculta en móvil) -->
   <img
-    class="hero-bg-img"
+    class="hero-bg-img hero-bg-desktop"
     src="https://raw.githubusercontent.com/digitalmenteepro-cell/tierrasdehojasvalle/refs/heads/main/portada%203.png"
+    alt="Tierra de Hojas Valle — Sustrato Premium"
+  />
+  <!-- Imagen móvil (oculta en desktop) -->
+  <img
+    class="hero-bg-img hero-bg-mobile"
+    src="https://raw.githubusercontent.com/digitalmenteepro-cell/tierrasdehojasvalle/refs/heads/main/movil%201080%20x%201920.png"
     alt="Tierra de Hojas Valle — Sustrato Premium"
   />
 
