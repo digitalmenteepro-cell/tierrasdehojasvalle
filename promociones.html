@@ -71,7 +71,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center top;
+    object-position: center center;
     display: block;
     transition: transform .6s cubic-bezier(.16,1,.3,1);
   }
@@ -263,8 +263,13 @@
   @media(max-width:860px) {
     .oferta-grid { grid-template-columns: 1fr; }
     .oferta-img-col {
-      min-height: 300px;
-      max-height: 360px;
+      min-height: unset;
+      max-height: unset;
+    }
+    .oferta-img-col img {
+      object-fit: contain;
+      object-position: center center;
+      background: #1e4212;
     }
     .oferta-img-col::after {
       background: linear-gradient(
@@ -279,7 +284,7 @@
   }
 
   @media(max-width:480px) {
-    .oferta-img-col { min-height: 240px; max-height: 280px; }
+    .oferta-img-col { min-height: unset; max-height: unset; }
     .oferta-title { font-size: 26px; }
     .oferta-contact-box { padding: 18px 20px; }
     .btn-oferta-main { width: 100%; justify-content: center; }
